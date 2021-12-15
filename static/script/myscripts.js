@@ -86,6 +86,9 @@ const indexLog = () => {
     try {
         removeExistForm();
         removeExistBtn();
+        addBtnCreateContact();
+        modifLogoPosition();
+        addFilesContact();
     } catch (error) {
         
     }
