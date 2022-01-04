@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const contactSchema = sequelize.define("salesforce.contact", {
+  const contactSchema = sequelize.define("contact", {
     firstName: {
       type: Sequelize.STRING
     },
@@ -11,6 +11,11 @@ module.exports = (sequelize, Sequelize) => {
     },
     userId: {
       type: Sequelize.STRING
+    }
+  },
+  {
+    define: {
+      schema: "salesforce"
     }
   });
 
