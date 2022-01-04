@@ -24,5 +24,5 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.contactSchema = require("../models/Contact")(sequelize, Sequelize);
-
+console.log("db : "+db)
 module.exports = db;
