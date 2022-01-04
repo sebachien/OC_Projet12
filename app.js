@@ -13,7 +13,7 @@ mongoose.connect('mmongodb+srv://admin:admin@openclassroom1.qq2d4.mongodb.net/my
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
-  
+
   const { Client } = require('pg');
 
   const client = new Client({
@@ -23,7 +23,9 @@ mongoose.connect('mmongodb+srv://admin:admin@openclassroom1.qq2d4.mongodb.net/my
     }
   });
   
-  client.connect();
+  client.connect().then(() => console.log('Connexion à PG réussie !'))
+  .catch(() => console.log('Connexion à PG échouée !'));
+
   
   client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
     if (err) throw err;
