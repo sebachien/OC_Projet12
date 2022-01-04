@@ -15,7 +15,9 @@ module.exports = (sequelize, Sequelize) => {
   },
   {
       schema: "salesforce",
-      tableName: 'contact'
+      tableName: 'contact',
+      createdAt: false,
+      updatedAt: false
     
   });
 
