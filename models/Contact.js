@@ -1,15 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
   const contactSchema = sequelize.define("contact", {
-    firstName: {
+    firstname: {
       type: Sequelize.STRING
     },
-    lastName: {
+    lastname: {
       type: Sequelize.STRING
     },
     email: {
       type: Sequelize.STRING
     },
-    userId: {
+    sfid: {
       type: Sequelize.STRING
     }
   },
