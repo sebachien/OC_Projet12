@@ -42,6 +42,7 @@ exports.getOneContact = (req, res, next) => {
 
 exports.getAllContact =  (req, res, next) => {
   console.log("Op :"+Op);
+  console.log("req :"+req);
   console.log("Contact :"+Contact);
   Contact.findAll()
     .then(contact => res.status(200).json(contact))
