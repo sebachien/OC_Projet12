@@ -105,11 +105,11 @@ const addBtnShowContact = () => {
             }
         }).then((res) => {
             console.log("res :"+res);
-            res.json().then((contacts) => {
-                addContactList(contacts);
-            }).then((res) => {
-                addEventListenerBtn();
-                })
+            //res.json().then((contacts) => {
+            //    addContactList(contacts);
+            //}).then((res) => {
+            //    addEventListenerBtn();
+            //    })
         })
         console.log('result ='+ result)
     }
