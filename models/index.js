@@ -20,7 +20,7 @@ sequelize
 
 const db = {};
 
-await sequelize.sync({ force: true });
+//await sequelize.sync({ force: true });
 console.log("All models were synchronized successfully.");
 
 db.Sequelize = Sequelize;
