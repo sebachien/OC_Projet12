@@ -1,4 +1,6 @@
-const Contact = require('../models/Contact');
+const db = require("../models");
+const Contact = db.contactSchema;
+const Op = db.Sequelize.Op;
 
 exports.createContact = (req, res, next) => {
     console.log(req.body)

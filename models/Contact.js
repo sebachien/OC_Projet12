@@ -1,10 +1,18 @@
-const mongoose = require('mongoose');
+module.exports = (sequelize, Sequelize) => {
+  const contactSchema = sequelize.define("Contact", {
+    firstName: {
+      type: Sequelize.STRING
+    },
+    lastName: {
+      type: Sequelize.STRING
+    },
+    email: {
+      type: Sequelize.STRING
+    },
+    userId: {
+      type: Sequelize.STRING
+    }
+  });
 
-const contactSchema = mongoose.Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true },
-  userId: { type: String, required: true },
-});
-
-module.exports = mongoose.model('Contact', contactSchema);
+  return contactSchema;
+};
