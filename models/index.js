@@ -18,6 +18,8 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+console.log("sequelize = "+sequelize)
+
 const db = {};
 
 sequelize.sync({ force: true });
