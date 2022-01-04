@@ -24,7 +24,6 @@ mongoose.connect('mmongodb+srv://admin:admin@openclassroom1.qq2d4.mongodb.net/my
   });
   
   client.connect().then(() => console.log('Connexion à PG réussie !'))
-  .catch(() => console.log('Connexion à PG échouée !'));
 
   
   client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
@@ -49,6 +48,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/api/contact', contactRoutes);
+
+const db = require("./models");
+db.sequelize.sync();
 
 
 module.exports = app;
