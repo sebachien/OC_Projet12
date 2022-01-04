@@ -18,6 +18,11 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+const db = {};
+
+sequelize.sync({ force: true });
+console.log("All models were synchronized successfully.");
+
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;

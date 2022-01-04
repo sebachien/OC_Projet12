@@ -19,7 +19,6 @@ app.use(bodyParser.json())
 app.use('/api/auth', userRoutes);
 app.use('/api/contact', contactRoutes);
 
-const db = require("./models");
 
 
 module.exports = app;
