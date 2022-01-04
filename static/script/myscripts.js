@@ -101,7 +101,7 @@ const addBtnShowContact = () => {
         const result = await fetch('/api/contact/', {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer '+sessionStorage.getItem('token')
+                //Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
         }).then((res) => {
             res.json().then((contacts) => {
