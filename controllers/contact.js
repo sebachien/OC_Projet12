@@ -41,7 +41,7 @@ exports.getOneContact = (req, res, next) => {
 
 
 exports.getAllContact =  (req, res, next) => {
-    Contact.findAll()
+    salesforce.contact.findAll()
     .then(contact => res.status(200).send(contact))
     .catch(error => res.status(400).send({ error }));
     };
