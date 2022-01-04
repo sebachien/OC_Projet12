@@ -14,9 +14,8 @@ module.exports = (sequelize, Sequelize) => {
     }
   },
   {
-    define: {
       schema: "salesforce"
-    }
+    
   });
 
   return contactSchema;
