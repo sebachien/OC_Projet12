@@ -18,7 +18,6 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-console.log("sequelize = "+Object.values(sequelize[1]))
 
 const db = {};
 
