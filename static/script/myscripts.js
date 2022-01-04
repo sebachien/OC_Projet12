@@ -104,6 +104,7 @@ const addBtnShowContact = () => {
                 //Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
         }).then((res) => {
+            console.log("res :"+res);
             res.json().then((contacts) => {
                 addContactList(contacts);
             }).then((res) => {
