@@ -20,7 +20,6 @@ app.use('/api/auth', userRoutes);
 app.use('/api/contact', contactRoutes);
 
 const db = require("./models");
-db.sequelize.sync();
 
 
 module.exports = app;
