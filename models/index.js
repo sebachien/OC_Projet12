@@ -21,7 +21,7 @@ sequelize
 
 const db = {};
 
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 console.log("All models were synchronized successfully.");
 
 
