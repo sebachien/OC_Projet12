@@ -61,7 +61,7 @@ const addLoginEventListener = () => {
     async function login(event) {
         event.preventDefault()
         const email = document.getElementById('email').value
-        const password = document.getElementById('password').value
+        const password__c = document.getElementById('password').value
 
         const result = await fetch('/api/contact/login', {
             method: 'POST',
@@ -70,7 +70,7 @@ const addLoginEventListener = () => {
             },
             body: JSON.stringify({
                 email,
-                password
+                password__c
         })})
         .then((res) => {
             if(res.status == 200) {
@@ -268,7 +268,7 @@ const addRegisterEventListener = () => {
     async function registerUser(event) {
         event.preventDefault()
         const email = document.getElementById('email').value
-        const password = document.getElementById('password').value
+        const password__c = document.getElementById('password').value
         const firstname = document.getElementById('firstname').value
         const lastname = document.getElementById('lastname').value
 
@@ -279,7 +279,7 @@ const addRegisterEventListener = () => {
             },
             body: JSON.stringify({
                 email,
-                password,
+                password__c,
                 firstname,
                 lastname
             })
