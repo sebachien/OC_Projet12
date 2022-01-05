@@ -103,16 +103,18 @@ const addBtnShowContract = () => {
             headers: {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
-        }).then((contracts) => {
-                addContractList(contracts.all);
-                console.log(contracts.all);
+        }).then((res) => {
+            console.log("res :"+res.json());
+            res.all.then((contracts) => {
+                addContractList(contracts);
             }).then((res) => {
                 addEventListenerBtn();
                 })
-        }
+        })
         console.log('result ='+ result)
-    } 
-
+    }
+    
+}
 
 const addContractList = (contracts) => {
     if(typeof(contracts) != 'undefined' && contracts != null) {
