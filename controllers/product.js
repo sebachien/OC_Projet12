@@ -35,3 +35,12 @@ exports.modifyProduct = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
       
+exports.deleteProduct = (req, res, next) => {
+    Product.destroy({
+      where: {
+        sfid: req.params.sfid
+      }
+    })
+      .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+      .catch(error => res.status(400).json({ error }));
+  };
