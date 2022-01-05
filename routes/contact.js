@@ -5,7 +5,6 @@ const contactCtrl = require('../controllers/contact');
 const auth = require('../middleware/auth');
 
 
-router.post('/', auth ,contactCtrl.createContact);
 router.get('/:id', auth ,contactCtrl.getOneContact);
 router.put('/:id', auth ,contactCtrl.modifyContact);
 router.delete('/:id', auth ,contactCtrl.deleteContact);
