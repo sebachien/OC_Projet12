@@ -31,7 +31,7 @@ exports.getAllContract =  (req, res, next) => {
       .catch(error => res.status(400).json({ error }));
 };
 
-exports.modifyContact = (req, res, next) => {
+exports.modifyContract = (req, res, next) => {
     const contractObject = req.file ?
     {
         ...JSON.parse(req.body),
