@@ -104,7 +104,7 @@ const addBtnShowContract = () => {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
         }).then((res) => {
-            res.all}).then((contracts) => {
+            res}).then((contracts) => {
                 console.log(contracts);
                 addContractList(contracts);
             }).then((res) => {
