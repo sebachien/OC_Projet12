@@ -15,7 +15,11 @@ module.exports = (sequelize, Sequelize) => {
     ,
     sfid: {
       type: Sequelize.STRING
-    }
+    },
+    isdeleted: {
+        type: Sequelize.BOOLEAN
+    },
+    
   },
   {
       schema: "salesforce",

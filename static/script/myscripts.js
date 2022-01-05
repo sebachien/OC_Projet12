@@ -48,7 +48,7 @@ const removeExistBtn = () => {
     selectBtnPosition.remove();
 }
 const removeExistTbl = () => {
-    var selectTblPosition = document.getElementById('tbl-showContact');
+    var selectTblPosition = document.getElementById('tbl-showContract');
     selectTblPosition.remove();
 }
 
@@ -89,24 +89,24 @@ const addLoginEventListener = () => {
     }
 }
 
-const addBtnShowContact = () => {
+const addBtnShowContract = () => {
     const logo = document.getElementById('logo')
     const btn = document.createElement("button");
-    btn.setAttribute("id","btn-showContact");
-    btn.innerText = "Afficher contact"
-    btn.addEventListener('click', showContacts);
+    btn.setAttribute("id","btn-showContract");
+    btn.innerText = "Afficher contract"
+    btn.addEventListener('click', showContracts);
     logo.after(btn);
-    async function showContacts(event) {
+    async function showContracts(event) {
         event.preventDefault()
-        const result = await fetch('/api/contact/', {
+        const result = await fetch('/api/contract/', {
             method: 'GET',
             headers: {
                 //Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
         }).then((res) => {
             console.log("res :"+res);
-            //res.json().then((contacts) => {
-            //    addContactList(contacts);
+            //res.json().then((contracts) => {
+            //    addContractList(contracts);
             //}).then((res) => {
             //    addEventListenerBtn();
             //    })
@@ -116,25 +116,25 @@ const addBtnShowContact = () => {
     
 }
 
-const addContactList = (contacts) => {
-    if(typeof(contacts) != 'undefined' && contacts != null) {
+const addContractList = (contracts) => {
+    if(typeof(contracts) != 'undefined' && contracts != null) {
         // get the reference for the body
-        const positionContact = document.getElementById('btn-showContact')
+        const positionContract = document.getElementById('btn-showContract')
         try {
             removeExistTbl();
         } catch (error) {
             
         }
         // creates a <table> element and a <tbody> element
-        const tblContacts = document.createElement("table");
-        tblContacts.setAttribute("id","tbl-showContact");
+        const tblContracts = document.createElement("table");
+        tblContracts.setAttribute("id","tbl-showContract");
         const tblBody = document.createElement("tbody");
-        for(let contact of contacts) {
+        for(let contract of contracts) {
             const btnSupr = document.createElement("button");
             btnSupr.innerHTML = "Supprimer"
             btnSupr.setAttribute("class","btn-Supr");
-            btnSupr.setAttribute("data",contact._id);
-            const tblParams = ["Email : "+contact.email , "FirstName : "+contact.firstName , "LastName : "+contact.lastName , "userId : "+contact.userId, "Id : "+contact._id, "btnSupr"];
+            btnSupr.setAttribute("data",contract._id);
+            const tblParams = ["Email : "+contract.email , "FirstName : "+contract.firstName , "LastName : "+contract.lastName , "userId : "+contract.userId, "Id : "+contract._id, "btnSupr"];
             const row = document.createElement("tr");
             for (let param of tblParams) {
                 // Create a <td> element and a text node, make the text
@@ -157,9 +157,9 @@ const addContactList = (contacts) => {
         }
         
         // put the <tbody> in the <table>
-        tblContacts.appendChild(tblBody);
+        tblContracts.appendChild(tblBody);
         // sets the border attribute of tbl to 2;
-        positionContact.before(tblContacts)
+        positionContract.before(tblContracts)
     }
 }
 
@@ -168,13 +168,13 @@ const addEventListenerBtn = () => {
     console.log(btnSuprList);
     for(const btnSupr of btnSuprList ) {
         console.log(btnSupr);
-        btnSupr.addEventListener('click', suprContact)
+        btnSupr.addEventListener('click', suprContract)
     }
 }
 
-async function suprContact(event) {
-    const contact = event.target.attributes[1].nodeValue
-    const result = await fetch('/api/contact/'+contact, {
+async function suprContract(event) {
+    const contract = event.target.attributes[1].nodeValue
+    const result = await fetch('/api/contract/'+contract, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ async function suprContact(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         params: {
-            id:contact
+            id:contract
         }
     }).then((res) => {
         res.json()
@@ -194,45 +194,45 @@ const indexLog = () => {
     try {
         removeExistForm();
         removeExistBtn();
-        addBtnCreateContact();
+        addBtnCreateContract();
         modifLogoPosition();
-        addBtnShowContact();
+        addBtnShowContract();
     } catch (error) {
         
     }
 }
 
-const addBtnCreateContact = () => {
+const addBtnCreateContract = () => {
     const logo = document.getElementById('logo')
     const btn = document.createElement("button");
-    btn.classList.add("btn-contact")
-    btn.innerText = "Nouveau contact"
-    btn.addEventListener('click', addFormCreateContact);
+    btn.classList.add("btn-contract")
+    btn.innerText = "Nouveau contract"
+    btn.addEventListener('click', addFormCreateContract);
     logo.after(btn);
 }
 
-const addFormCreateContact = () => {
+const addFormCreateContract = () => {
     try{
         removeExistForm()
     }catch(error){
         console.log('Pas de formulaire a remove')
     }
         
-    const btn = document.querySelector('.btn-contact');
+    const btn = document.querySelector('.btn-contract');
     var form = document.createElement("form");
-    form.setAttribute("id","createContact");
-    form.innerHTML ='<h2>Nouveau contact</h2></br><label for="mail"><b>Email</b></label><input type="text" autocomplete="off" id="email" placeholder="Email" /><label for="firstname"><b>Firstname</b></label><input type="test" autocomplete="off" id="firstname" placeholder="first name" /><label for="lastname"><b>Lastname</b></label><input type="test" autocomplete="off" id="lastname" placeholder="last name" /><input type="submit" id="submitbtn" value="Créer le contact" />';
-    form.addEventListener('submit', createContact)
+    form.setAttribute("id","createContract");
+    form.innerHTML ='<h2>Nouveau contract</h2></br><label for="mail"><b>Email</b></label><input type="text" autocomplete="off" id="email" placeholder="Email" /><label for="firstname"><b>Firstname</b></label><input type="test" autocomplete="off" id="firstname" placeholder="first name" /><label for="lastname"><b>Lastname</b></label><input type="test" autocomplete="off" id="lastname" placeholder="last name" /><input type="submit" id="submitbtn" value="Créer le contact" />';
+    form.addEventListener('submit', createContract)
     btn.after(form);
 
-    async function createContact(event) {
+    async function createContract(event) {
         event.preventDefault()
         const email = document.getElementById('email').value
         const firstname = document.getElementById('firstname').value
         const lastname = document.getElementById('lastname').value
         const userId = sessionStorage.getItem('userId')
         console.log(email, firstname, lastname, userId)
-        const result = await fetch('/api/contact/', {
+        const result = await fetch('/api/contract/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -304,9 +304,9 @@ if(sessionStorage.getItem('status') != 'connecté') {
     sessionStorage.setItem('status', 'déconnecté');
 } else if (sessionStorage.getItem('status') == 'connecté') {
     removeExistBtn();
-    addBtnCreateContact();
+    addBtnCreateContract();
     modifLogoPosition();
-    addBtnShowContact();
+    addBtnShowContract();
 }
 
 

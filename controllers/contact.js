@@ -4,19 +4,6 @@ const jwt = require('jsonwebtoken');
 const Contact = db.contactSchema;
 const Op = db.Sequelize.Op;
 
-exports.createContact = (req, res, next) => {
-    console.log(req.body)
-    //delete contactObject._id;
-    const contact = new Contact({
-      email: req.body.email,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      sfid: req.body.sfid
-    });
-    contact.save()
-      .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
-}
 
 exports.deleteContact = (req, res, next) => {
   Contact.deleteOne({ _id: req.params.id })
