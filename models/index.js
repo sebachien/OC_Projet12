@@ -30,6 +30,6 @@ db.sequelize = sequelize;
 
 db.contactSchema = require("../models/Contact")(sequelize, Sequelize);
 db.contractSchema = require("../models/Contract")(sequelize, Sequelize);
-db.productSchema = require("../models/Product")(sequelize, Sequelize);
+//db.productSchema = require("../models/Product")(sequelize, Sequelize);
 
 module.exports = db;
