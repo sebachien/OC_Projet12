@@ -64,7 +64,7 @@ exports.register = (req, res, next) => {
       return;
     }
     console.log(req.body.email)
-    Contact.findAll({ limit: 1, where: { email: req.body.email } })
+    Contact.findOne({ where: {email: req.body.email} })
     .then(data => {
       if (data) {
         res.status(400).send({
