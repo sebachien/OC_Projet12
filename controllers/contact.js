@@ -97,6 +97,8 @@ exports.register = (req, res, next) => {
         if (!contact) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !'});
         }
+        console.log("req.body.password__c ="+req.body.password__c)
+        console.log("contact.password__c ="+contact.password__c)
         bcrypt.compare(req.body.password__c, contact.password__c)
         .then(valid => {
             if (!valid) {
@@ -112,7 +114,7 @@ exports.register = (req, res, next) => {
             });
             
         })
-        .catch(error => res.status(500).json({ error : 'error login 2'}));
+        .catch(error => res.status(500).json({ error : 'error bcrypt'}));
     })
     .catch(error => res.status(500).json({ error : 'error login 1'}));
 };
