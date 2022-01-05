@@ -64,7 +64,7 @@ exports.register = (req, res, next) => {
       return;
     }
 
-    Contact.findByPk(req.body.email)
+    Contact.findAll({ limit: 1, where: { email: req.body.email } })
     .then(data => {
       if (data) {
         res.status(400).send({
@@ -92,7 +92,7 @@ exports.register = (req, res, next) => {
 
 
   exports.login = (req ,res, next) => {
-    Contact.findByPk(req.body.email)
+    Contact.findAll({ limit: 1, where: { email: req.body.email } })
     .then(user => {
         if (!user) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !'});
