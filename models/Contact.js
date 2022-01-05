@@ -11,8 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     password__c: {
       type: Sequelize.STRING
-    }
-    ,
+    },
     sfid: {
       type: Sequelize.STRING
     },
