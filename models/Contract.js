@@ -3,6 +3,9 @@ module.exports = (sequelize, Sequelize) => {
       accountid: {
         type: Sequelize.STRING
       },
+      contractnumber: {
+        type: Sequelize.STRING
+      },
       startdate: {
         type: Sequelize.DATE
       },
@@ -26,9 +29,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       contractterm: {
           type: Sequelize.INTEGER
-      },
-      sfid: {
-        type: Sequelize.STRING
       },
       customersignedid: {
         type: Sequelize.STRING
