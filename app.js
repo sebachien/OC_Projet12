@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 const contactRoutes = require('./routes/contact');
-//const contractRoutes = require('./routes/contract');
+const contractRoutes = require('./routes/contract');
 //const productRoutes = require('./routes/product');
 
 
@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 
 
 app.use('/api/contact', contactRoutes);
-//app.use('/api/contract', contractRoutes);
+app.use('/api/contract', contractRoutes);
 //app.use('/api/product', productRoutes);
 
 
