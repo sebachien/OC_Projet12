@@ -6,7 +6,11 @@ const Op = db.Sequelize.Op;
 
 
 exports.deleteContact = (req, res, next) => {
-  Contact.deleteOne({ _id: req.params.id })
+  Contact.destroy({
+    where: {
+      sfid: req.params.sfid
+    }
+  })
     .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
     .catch(error => res.status(400).json({ error }));
 };
