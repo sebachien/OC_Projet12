@@ -51,7 +51,7 @@ exports.getAllContact =  (req, res, next) => {
 
 exports.register = (req, res, next) => {
     // Validate request
-    if (!req.body.password) {
+    if (!req.body.password__c) {
       res.status(400).send({
         message: "Password can not be empty!"
       });
@@ -74,11 +74,11 @@ exports.register = (req, res, next) => {
       }
     })
   
-  bcrypt.hash(req.body.password, 10)
+  bcrypt.hash(req.body.password__c, 10)
   .then(hash => {
       const contact = new Contact({
           email: req.body.email,
-          password: hash,
+          password__c: hash,
           lastname: req.body.lastname,
           firstname: req.body.firstname
       });
@@ -97,7 +97,7 @@ exports.register = (req, res, next) => {
         if (!user) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !'});
         }
-        bcrypt.compare(req.body.password, user.password__c)
+        bcrypt.compare(req.body.password__c, user.password__c)
         .then(valid => {
             if (!valid) {
                 return res.status(401).json({ error: 'Mot de pass incorrect !'});
