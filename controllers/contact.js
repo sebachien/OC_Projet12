@@ -71,22 +71,22 @@ exports.register = (req, res, next) => {
           message: "Email already exist!"
         });
         return;
+      } else {
+        bcrypt.hash(req.body.password__c, 10)
+        .then(hash => {
+          const contact = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password__c: hash,  
+          };
+
+          Contact.create(contact)
+          .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
+          .catch(error => res.status(400).json({error}))
+        })
       }
     })
-  
-  bcrypt.hash(req.body.password__c, 10)
-  .then(hash => {
-      const contact = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password__c: hash,  
-      };
-
-      Contact.create(contact)
-      .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
-      .catch(error => res.status(400).json({error}))
-   })
    .catch(error => res.status(500).json({error}));
   };
 
