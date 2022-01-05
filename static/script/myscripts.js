@@ -77,7 +77,7 @@ const addLoginEventListener = () => {
                 res.json().then((data) => {
                     console.log(data.token)
                     sessionStorage.setItem('token', data.token);
-                    sessionStorage.setItem('userId', data.sfid);
+                    sessionStorage.setItem('userId', data.contactId);
                     sessionStorage.setItem('status', 'connecté');
                     
                 })
@@ -105,7 +105,7 @@ const addBtnShowContract = () => {
             }
         }).then((res) => {
             console.log("res :"+res.json());
-            res.json().then((contracts) => {
+            res.json().clone().then((contracts) => {
                 addContractList(contracts);
             }).then((res) => {
                 addEventListenerBtn();
