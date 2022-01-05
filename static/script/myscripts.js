@@ -105,7 +105,7 @@ const addBtnShowContract = () => {
             }
         }).then((res) => {
             console.log("res :"+res.json());
-            res.json().clone().then((contracts) => {
+            res.then((contracts) => {
                 addContractList(contracts);
             }).then((res) => {
                 addEventListenerBtn();
