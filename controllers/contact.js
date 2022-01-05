@@ -1,4 +1,6 @@
 const db = require("../models");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Contact = db.contactSchema;
 const Op = db.Sequelize.Op;
 
