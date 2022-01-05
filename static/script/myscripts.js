@@ -101,7 +101,7 @@ const addBtnShowContract = () => {
         const result = await fetch('/api/contract/', {
             method: 'GET',
             headers: {
-                //Authorization: 'Bearer '+sessionStorage.getItem('token')
+                Authorization: 'Bearer '+sessionStorage.getItem('token')
             }
         }).then((res) => {
             console.log("res :"+res);
