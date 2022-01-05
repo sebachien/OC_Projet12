@@ -76,12 +76,12 @@ exports.register = (req, res, next) => {
   
   bcrypt.hash(req.body.password__c, 10)
   .then(hash => {
-      const contact = new Contact({
-          email: req.body.email,
-          password__c: hash,
-          lastname: req.body.lastname,
-          firstname: req.body.firstname
-      });
+      const contact = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password__c: hash,  
+      };
 
       Contact.create(contact)
       .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
