@@ -173,7 +173,9 @@ const addEventListenerBtn = () => {
 
 async function suprContract(event) {
     const contract = event.target.attributes[1].nodeValue
-    const result = await fetch('/api/contract/'+contract, {
+    console.log("event :"+event.target)
+    console.log("contract :"+contract)
+    const result = await fetch('/api/contract/'+contract.id, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -181,7 +183,7 @@ async function suprContract(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         params: {
-            id:contract
+            id:contract.id
         }
     }).then((res) => {
         res.json()
