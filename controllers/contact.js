@@ -103,9 +103,9 @@ exports.register = (req, res, next) => {
                 return res.status(401).json({ error: 'Mot de pass incorrect !'});
             }
             res.status(200).json({
-                userId: user._id,
+                userId: user.sfid,
                 token: jwt.sign(
-                    { userId: user._id},
+                    { userId: user.sfid},
                     'RANDOM_TOKEN_SECRET',
                     { expiresIn: '24h' }
                 )
