@@ -93,26 +93,26 @@ exports.register = (req, res, next) => {
 
   exports.login = (req ,res, next) => {
     Contact.findAll({ limit: 1, where: { email: req.body.email } })
-    .then(user => {
-        if (!user) {
+    .then(contact => {
+        if (!contact) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !'});
         }
-        bcrypt.compare(req.body.password__c, user.password__c)
+        bcrypt.compare(req.body.password__c, contact.password__c)
         .then(valid => {
             if (!valid) {
                 return res.status(401).json({ error: 'Mot de pass incorrect !'});
             }
             res.status(200).json({
-                userId: user.sfid,
+              contactId: contact.sfid,
                 token: jwt.sign(
-                    { userId: user.sfid},
+                    { contactId: contact.sfid},
                     'RANDOM_TOKEN_SECRET',
                     { expiresIn: '24h' }
                 )
             });
             
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error : 'error login 2'}));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error : 'error login 1'}));
 };
