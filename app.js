@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 app.use('/', express.static(path.join(__dirname, 'static')))
 app.use(bodyParser.json())
 
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', contactRoutes);
 app.use('/api/contact', contactRoutes);
 
 

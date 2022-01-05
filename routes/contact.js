@@ -11,4 +11,7 @@ router.put('/:id', auth ,contactCtrl.modifyContact);
 router.delete('/:id', auth ,contactCtrl.deleteContact);
 router.get('/',contactCtrl.getAllContact);
 
+router.post('/register', contactCtrl.register);
+router.post('/login', contactCtrl.login);
+
 module.exports = router;

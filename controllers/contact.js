@@ -45,3 +45,72 @@ exports.getAllContact =  (req, res, next) => {
     .then(contact => res.status(200).json(contact))
     .catch(error => res.status(400).json({ error }));
     };
+
+
+exports.register = (req, res, next) => {
+    // Validate request
+    if (!req.body.password) {
+      res.status(400).send({
+        message: "Password can not be empty!"
+      });
+      return;
+    }
+    if (!req.body.email) {
+      res.status(400).send({
+        message: "Password can not be empty!"
+      });
+      return;
+    }
+
+    Contact.findByPk(req.body.email)
+    .then(data => {
+      if (data) {
+        res.status(400).send({
+          message: "Email already exist!"
+        });
+        return;
+      }
+    })
+  
+  bcrypt.hash(req.body.password, 10)
+  .then(hash => {
+      const contact = new Contact({
+          email: req.body.email,
+          password: hash,
+          lastname: req.body.lastname,
+          firstname: req.body.firstname
+      });
+
+      Contact.create(contact)
+      .then(() => res.status(201).json({ message: 'Utilisateur crée !'}))
+      .catch(error => res.status(400).json({error}))
+   })
+   .catch(error => res.status(500).json({error}));
+  };
+
+
+  exports.login = (req ,res, next) => {
+    Contact.findByPk(req.body.email)
+    .then(user => {
+        if (!user) {
+            return res.status(401).json({ error: 'Utilisateur non trouvé !'});
+        }
+        bcrypt.compare(req.body.password, user.password__c)
+        .then(valid => {
+            if (!valid) {
+                return res.status(401).json({ error: 'Mot de pass incorrect !'});
+            }
+            res.status(200).json({
+                userId: user._id,
+                token: jwt.sign(
+                    { userId: user._id},
+                    'RANDOM_TOKEN_SECRET',
+                    { expiresIn: '24h' }
+                )
+            });
+            
+        })
+        .catch(error => res.status(500).json({ error }));
+    })
+    .catch(error => res.status(500).json({ error }));
+};

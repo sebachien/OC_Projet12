@@ -25,7 +25,7 @@ const addNewFormRegister = () => {
     var selectFormPosition = document.querySelector("#logo");
     var form = document.createElement("form");
     form.setAttribute("id","reg-form");
-    form.innerHTML ='<h2>Register</h2></br><label for="uname"><b>Email</b></label><input type="text" autocomplete="off" id="email" placeholder="Email" /><label for="psw"><b>Password</b></label><input type="password" autocomplete="off" id="password" placeholder="Password" /><input type="submit" id="submitbtn" value="Submit Form" /></br></br><b id="errorMessage"></b>';
+    form.innerHTML ='<h2>Register</h2></br><label for="uname"><b>Email</b></label><input type="text" autocomplete="off" id="email" placeholder="Email" /><label for="uname"><b>First Name</b></label><input type="text" autocomplete="off" id="firstname" placeholder="FirstName" /><label for="uname"><b>Last Name</b></label><input type="text" autocomplete="off" id="lastname" placeholder="LastName" /><label for="psw"><b>Password</b></label><input type="password" autocomplete="off" id="password" placeholder="Password" /><input type="submit" id="submitbtn" value="Submit Form" /></br></br><b id="errorMessage"></b>';
     selectFormPosition.after(form);
 }
 
@@ -63,7 +63,7 @@ const addLoginEventListener = () => {
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
 
-        const result = await fetch('/api/auth/login', {
+        const result = await fetch('/api/contact/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -269,15 +269,19 @@ const addRegisterEventListener = () => {
         event.preventDefault()
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
+        const firstname = document.getElementById('firstname').value
+        const lastname = document.getElementById('lastname').value
 
-        const result = await fetch('/api/auth/register', {
+        const result = await fetch('/api/contact/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email,
-                password
+                password,
+                firstname,
+                lastname
             })
         }).then((res) => res.json())
         console.log(result);
