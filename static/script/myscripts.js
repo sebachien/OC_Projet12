@@ -277,12 +277,12 @@ const addRegisterEventListener = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: {
+            body: JSON.stringify({
                 email,
                 password,
                 firstname,
                 lastname
-            }
+            })
         }).then((res) => res.json())
         console.log(result);
         if (result.message == "Utilisateur crée !") {
