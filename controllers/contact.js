@@ -92,7 +92,7 @@ exports.register = (req, res, next) => {
 
 
   exports.login = (req ,res, next) => {
-    Contact.findAll({ limit: 1, where: { email: req.body.email } })
+    Contact.findOne({ where: {email: req.body.email} })
     .then(contact => {
         if (!contact) {
             return res.status(401).json({ error: 'Utilisateur non trouvé !'});
