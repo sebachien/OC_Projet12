@@ -108,11 +108,10 @@ const addBtnShowContract = () => {
             }).then((res) => {
                 addEventListenerBtn();
                 })
-        })
+        }
         console.log('result ='+ result)
-    }
-    
-}
+    } 
+
 
 const addContractList = (contracts) => {
     if(typeof(contracts) != 'undefined' && contracts != null) {
