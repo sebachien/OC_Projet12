@@ -71,14 +71,14 @@ form {
     padding-top: 16px;
   }
   
- #tbl-showContact {
+ #tbl-showContract {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
   border: 3px solid #04AA6D;
  }
 
- #tbl-showContact th,  #tbl-showContact td {
+ #tbl-showContract th,  #tbl-showContract td {
   padding: 20px;
   border: 3px solid #04AA6D;
 }

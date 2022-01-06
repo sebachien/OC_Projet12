@@ -32,6 +32,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       customersignedid: {
         type: Sequelize.STRING
+      },
+      enddate: {
+        type: Sequelize.DATE
       }
 
     },
