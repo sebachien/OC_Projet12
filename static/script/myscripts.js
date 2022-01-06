@@ -222,16 +222,59 @@ const addFormCreateContract = () => {
     const btn = document.querySelector('.btn-contract');
     var form = document.createElement("form");
     form.setAttribute("id","createContract");
-    form.innerHTML ='<h2>Nouveau contract</h2></br><label for="mail"><b>Email</b></label><input type="text" autocomplete="off" id="email" placeholder="Email" /><label for="firstname"><b>Firstname</b></label><input type="test" autocomplete="off" id="firstname" placeholder="first name" /><label for="lastname"><b>Lastname</b></label><input type="test" autocomplete="off" id="lastname" placeholder="last name" /><input type="submit" id="submitbtn" value="Créer le contact" />';
+    form.innerHTML =```<div class="container m-5">
+        <form>
+            <div class="mb-3">
+                <label for="startdate">Début du contrat</label>
+                <input type="date" class="form-control" id="startdate" placeholder="2022/01/15">
+            </div>
+            <div class="mb-3">
+                <label for="status">Status</label>
+                <select class="form-select" aria-label="Select status" id="status">
+                <option selected>Draft</option>
+                <option value="1">Actived</option>
+                <option value="2">In Approval Process</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="contractterm">Temps du contract (en mois)</label>
+                <input type="number" class="form-control" id="contractterm" placeholder="0">
+            </div>
+            <h3>Adresse de facturation :</h3>
+            <div class="mb-3">
+                <label for="billingstreet">Rue</label>
+                <input type="text" class="form-control" id="billingstreet" placeholder="10 rue du saint racleton">
+            </div>
+            <div class="mb-3">
+                <label for="billingcity">Ville</label>
+                <input type="text" class="form-control" id="billingcity" placeholder="RacletteCity">
+            </div>
+            <div class="mb-3">
+                <label for="billingpostalcode">Code postal</label>
+                <input type="text" class="form-control" id="billingpostalcode" placeholder="666">
+            </div>
+            <div class="mb-3">
+                <label for="billingcountry">Pays</label>
+                <input type="text" class="form-control" id="billingcountry" placeholder="Fromage">
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter ce contrat</button>
+        </form>
+    </div>```;
     form.addEventListener('submit', createContract)
     btn.after(form);
 
     async function createContract(event) {
         event.preventDefault()
-        const email = document.getElementById('email').value
-        const firstname = document.getElementById('firstname').value
-        const lastname = document.getElementById('lastname').value
-        const userId = sessionStorage.getItem('userId')
+        const startdate = document.getElementById('startdate').value
+        const status = document.getElementById('status').value
+        const contractterm = document.getElementById('contractterm').value
+        const billingstreet = document.getElementById('billingstreet').value
+        const billingcity = document.getElementById('billingcity').value
+        const billingpostalcode = document.getElementById('billingpostalcode').value
+        const billingcountry = document.getElementById('billingcountry').value
+        const customersignedid = sessionStorage.getItem('userId')
+        const accountid ='0017Q000002OefCQAS'
+
         console.log(email, firstname, lastname, userId)
         const result = await fetch('/api/contract/', {
             method: 'POST',
@@ -241,10 +284,15 @@ const addFormCreateContract = () => {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
             },
             body: JSON.stringify({
-                firstname,
-                lastname, 
-                email,
-                userId
+                startdate,
+                status, 
+                contractterm,
+                billingstreet,
+                billingcity,
+                billingpostalcode,
+                billingcountry,
+                customersignedid,
+                accountid
 
             })
         }).then((res) => {
