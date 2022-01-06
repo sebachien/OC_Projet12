@@ -131,10 +131,12 @@ const addContractList = (contracts) => {
         const thead = document.createElement("thead");
         thead.setAttribute("class","thead-dark");
         thead.innerHTML = `<tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Info 1 </th>
-        <th scope="col">Info 2 </th>
-        <th scope="col">Action</th>
+        <th scope="col">Numéro du contrat</th>
+        <th scope="col">Date du début</th>
+        <th scope="col">Date de fin</th>
+        <th scope="col">Temps du contract (en mois)</th>
+        <th scope="col">Status</th>
+        <th scope="col">Adresse de facturation</th>
     </tr>`
         const tblBody = document.createElement("tbody");
         for(let contract of contracts) {
@@ -142,7 +144,7 @@ const addContractList = (contracts) => {
             btnSupr.innerHTML = "Supprimer"
             btnSupr.setAttribute("class","btn btn-outline-danger");
             btnSupr.setAttribute("data",contract.id);
-            const tblParams = ["Numéro du contrat : "+contract.contractnumber , "Date du début : "+contract.startdate , "Status : "+contract.status , "customersignedid : "+sessionStorage.getItem('userID'), "Id : "+contract.sfid, "btnSupr"];
+            const tblParams = [contract.contractnumber , contract.startdate , contract.enddate , contract.contractterm , contract.status , contract.billingstreet+" "+contract.billingpostalcode+" "+contract.billingcity+" "+contract.billingcountry];
             const row = document.createElement("tr");
             for (let param of tblParams) {
                 // Create a <td> element and a text node, make the text
