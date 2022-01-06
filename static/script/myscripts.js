@@ -277,7 +277,7 @@ async function modifContract(event) {
     console.log("event :"+event.target)
     console.log("contract :"+contract)
     const result = await fetch('/api/contract/'+contract, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
