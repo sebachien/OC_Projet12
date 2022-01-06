@@ -251,7 +251,7 @@ const addFormModifContract = (event) => {
     </div>`;
     console.log(form)
     form.addEventListener('submit', modifContract)
-    btn.before(form);
+    btn.after(form);
 }
 
 async function suprContract(event) {
