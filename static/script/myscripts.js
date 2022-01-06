@@ -195,7 +195,7 @@ const addEventListenerBtn = () => {
         console.log(btnSupr);
         btnSupr.addEventListener('click', suprContract)
     }
-    const btnModifList = document.querySelectorAll('.btn-Modis');
+    const btnModifList = document.querySelectorAll('.btn-Modif');
     for(const btnModif of btnModifList ) {
         btnModif.addEventListener('click', addFormModifContract)
     }
