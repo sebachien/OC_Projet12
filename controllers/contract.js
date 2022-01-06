@@ -32,7 +32,12 @@ exports.getAllContract =  (req, res, next) => {
 };
 
 exports.modifyContract = (req, res, next) => {
-  const contract = Contract.findByPk(req.params.sfid);
+  const contract = Contract.findByPk(req.params.sfid).then((res) => {
+    console.log(contract);
+  Contract.update(req.body, {where :{sfid: req.params.sfid}})
+    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
+})
   console.log(contract);
   Contract.update(req.body, {where :{sfid: req.params.sfid}})
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
