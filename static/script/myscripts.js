@@ -48,8 +48,10 @@ const removeExistBtn = () => {
 }
 
 const removeExistTbl = () => {
-    var selectTblPosition = document.getElementById('tbl-showContract');
-    selectTblPosition.remove();
+    var selectTblPosition = document.getElementsByClassName('table');
+    for(let selectTbl of selectTblPosition) {
+        selectTbl.remove();
+    }
 }
 
 const addLoginEventListener = () => {
