@@ -37,7 +37,6 @@ const addNewFormLogin = () => {
     selectFormPosition.after(form);
 }
 
-
 const removeExistForm = () => {
     var selectFormPosition = document.querySelector('form');
     selectFormPosition.remove();
@@ -47,12 +46,11 @@ const removeExistBtn = () => {
     var selectBtnPosition = document.querySelector('.container');
     selectBtnPosition.remove();
 }
+
 const removeExistTbl = () => {
     var selectTblPosition = document.getElementById('tbl-showContract');
     selectTblPosition.remove();
 }
-
-
 
 const addLoginEventListener = () => {
     const form = document.getElementById('login')
@@ -102,12 +100,45 @@ const addBtnShowContract = () => {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
+            },
+            params: {
+                contactid : sessionStorage.getItem('userId')
             }
         }).then((res) => {
             res.json().then((contracts) => {
                 addContractList(contracts);
             }).then((res) => {
-                addEventListenerBtn();
+                addEventListenerBtnContract();
+                try {
+                    removeExistForm();
+                } catch (error) {
+                    
+                }
+                })
+            })
+    }
+    
+}
+
+const addBtnShowProduct = () => {
+    const logo = document.getElementById('logo')
+    const btn = document.createElement("button");
+    btn.setAttribute("id","btn-showProduct");
+    btn.innerText = "Afficher Product"
+    btn.addEventListener('click', showProduct);
+    logo.after(btn);
+    async function showProduct(event) {
+        event.preventDefault()
+        const result = await fetch('/api/product/', {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer '+sessionStorage.getItem('token')
+            }
+        }).then((res) => {
+            res.json().then((products) => {
+                addProductList(products);
+            }).then((res) => {
+                addEventListenerBtnProduct();
                 try {
                     removeExistForm();
                 } catch (error) {
@@ -193,7 +224,72 @@ const addContractList = (contracts) => {
     }
 }
 
-const addEventListenerBtn = () => {
+const addProductList = (products) => {
+    if(typeof(products) != 'undefined' && products != null) {
+        // get the reference for the body
+        const positionProduct = document.getElementById('btn-showProduct')
+        try {
+            removeExistTbl();
+        } catch (error) {
+            
+        }
+        // creates a <table> element and a <tbody> element
+        const tblProducts = document.createElement("table");
+        tblProducts.setAttribute("id","tbl-showProduct");
+        tblProducts.setAttribute("class","table");
+        const thead = document.createElement("thead");
+        thead.setAttribute("class","thead-dark");
+        thead.innerHTML = `<tr>
+        <th scope="col">Nom du produit</th>
+        <th scope="col">Déscription</th>
+    </tr>`
+        const tblBody = document.createElement("tbody");
+        for(let product of products) {
+            const btnSupr = document.createElement("button");
+            btnSupr.innerHTML = "Supprimer"
+            btnSupr.setAttribute("class","btn btn-outline-danger btn-Supr");
+            btnSupr.setAttribute("data",product.id);
+            const btnModif = document.createElement("button");
+            btnModif.innerHTML = "Modifier"
+            btnModif.setAttribute("class","btn btn-outline-primary btn-Modif");
+            btnModif.setAttribute("data",product.id);
+            btnModif.setAttribute("name",product.name);
+            btnModif.setAttribute("description",product.description);
+            const tblParams = [product.name , product.description , "btnSupr", "btnModif"];
+            const row = document.createElement("tr");
+            for (let param of tblParams) {
+                // Create a <td> element and a text node, make the text
+                // node the contents of the <td>, and put the <td> at
+                // the end of the table row
+                var cell = document.createElement("td");
+
+                if(param == "btnSupr") {
+                    console.log("param == supr")
+                    cell.appendChild(btnSupr);
+                    row.appendChild(cell);
+                } else if(param == "btnModif") {
+                    console.log("param == modif")
+                    cell.appendChild(btnModif);
+                    row.appendChild(cell);
+                } else {
+                    let newText = document.createTextNode(param);
+                    cell.appendChild(newText);
+                    row.appendChild(cell);
+                }
+              }
+              // add the row to the end of the table body
+              tblBody.appendChild(row);
+        }
+        
+        // put the <tbody> in the <table>
+        tblProducts.appendChild(thead);
+        tblProducts.appendChild(tblBody);
+        // sets the border attribute of tbl to 2;
+        positionProduct.before(tblProducts)
+    }
+}
+
+const addEventListenerBtnContract = () => {
     const btnSuprList = document.querySelectorAll('.btn-Supr');
     for(const btnSupr of btnSuprList ) {
         btnSupr.addEventListener('click', suprContract)
@@ -204,6 +300,16 @@ const addEventListenerBtn = () => {
     }
 }
 
+const addEventListenerBtnProduct = () => {
+    const btnSuprList = document.querySelectorAll('.btn-Supr');
+    for(const btnSupr of btnSuprList ) {
+        btnSupr.addEventListener('click', suprProduct)
+    }
+    const btnModifList = document.querySelectorAll('.btn-Modif');
+    for(const btnModif of btnModifList ) {
+        btnModif.addEventListener('click', addFormModifProduct)
+    }
+}
 
 const addFormModifContract = (event) => {
     event.preventDefault()
@@ -259,6 +365,35 @@ const addFormModifContract = (event) => {
     btn.before(form);
 }
 
+const addFormModifProduct = (event) => {
+    event.preventDefault()
+    try{
+        removeExistForm()
+    }catch(error){
+        console.log('Pas de formulaire a remove')
+    }
+        
+    const btn = document.querySelector('#btn-showProduct');
+    var form = document.createElement("form");
+    form.setAttribute("id","modifProduct");
+    form.innerHTML =`<div class="container m-5">
+        <form>
+            <div class="mb-3">
+                <label for="name">Rue</label>
+                <input type="text" class="form-control" id="name" value="`+event.target.attributes.name.nodeValue+`">
+            </div>
+            <div class="mb-3">
+                <label for="description">Ville</label>
+                <input type="text" class="form-control" id="description" value="`+event.target.attributes.description.nodeValue+`">
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
+        </form>
+    </div>`;
+    sessionStorage.setItem('product', event.target.attributes.data.nodeValue);
+    form.addEventListener('submit', modifProduct)
+    btn.before(form);
+}
+
 async function suprContract(event) {
     const contract = event.target.attributes[1].nodeValue
     console.log("event :"+event.target)
@@ -272,6 +407,27 @@ async function suprContract(event) {
         },
         params: {
             sfid:contract
+        }
+    }).then((res) => {
+        res.json();
+        
+    })
+    
+}
+
+async function suprProduct(event) {
+    const product = event.target.attributes[1].nodeValue
+    console.log("event :"+event.target)
+    console.log("contract :"+contract)
+    const result = await fetch('/api/contract/'+product, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            Authorization: 'Bearer '+sessionStorage.getItem('token')
+        },
+        params: {
+            sfid:product
         }
     }).then((res) => {
         res.json();
@@ -317,8 +473,37 @@ async function modifContract(event) {
         } catch (error) {
             
         }
-    })
-    
+    }) 
+}
+
+async function modifProduct(event) {
+    event.preventDefault()
+    const contract = sessionStorage.getItem('product');
+    const name = document.getElementById('name').value
+    const description = document.getElementById('description').value
+
+    const result = await fetch('/api/contract/'+contract, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            Authorization: 'Bearer '+sessionStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            name,
+            description
+        }),
+        params: {
+            id:contract
+        }
+    }).then((res) => {
+        res.json();
+        try {
+            removeExistForm();
+        } catch (error) {
+            
+        }
+    }) 
 }
 
 const indexLog = () => {
@@ -437,7 +622,6 @@ const modifLogoPosition = () => {
     logo.style.width = '300px';
 
 }
-
 
 const addRegisterEventListener = () => {
     const form = document.getElementById('reg-form')

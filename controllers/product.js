@@ -26,11 +26,7 @@ exports.getAllProduct =  (req, res, next) => {
 };
 
 exports.modifyProduct = (req, res, next) => {
-    const productObject = req.file ?
-    {
-        ...JSON.parse(req.body),
-    } : { ...req.body };
-    Product.update({ ...productObject, sfid: req.params.sfid },{ where: {sfid: req.params.sfid} }, { ...productObject, sfid: req.params.sfid })
+    Product.update(req.body, {where :{id: req.params.id}})
         .then(() => res.status(200).json({ message: 'Objet modifié !'}))
         .catch(error => res.status(400).json({ error }));
 };

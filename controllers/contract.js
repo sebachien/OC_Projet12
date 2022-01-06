@@ -26,7 +26,7 @@ exports.getOneContract = (req, res, next) => {
 };
 
 exports.getAllContract =  (req, res, next) => {
-    Contract.findAll()
+    Contract.findAll({where : {customersignedid: req.params.contactid}})
       .then(contract => res.status(200).json(contract))
       .catch(error => res.status(400).json({ error }));
 };
