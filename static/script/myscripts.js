@@ -275,7 +275,6 @@ const addFormCreateContract = () => {
         const customersignedid = sessionStorage.getItem('userId')
         const accountid ='0017Q000002OefCQAS'
 
-        console.log(email, firstname, lastname, userId)
         const result = await fetch('/api/contract/', {
             method: 'POST',
             headers: {
