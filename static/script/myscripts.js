@@ -175,7 +175,7 @@ async function suprContract(event) {
     const contract = event.target.attributes[1].nodeValue
     console.log("event :"+event.target)
     console.log("contract :"+contract)
-    const result = await fetch('/api/contract/'+contract.sfid, {
+    const result = await fetch('/api/contract/'+contract, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ async function suprContract(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         params: {
-            sfid:contract.sfid
+            sfid:contract
         }
     }).then((res) => {
         res.json()
