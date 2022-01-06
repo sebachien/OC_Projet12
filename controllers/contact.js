@@ -39,7 +39,7 @@ exports.getOneContact = (req, res, next) => {
 
 
 exports.getAllContact =  (req, res, next) => {
-  Contact.findAll()
+  Contact.findAll({where :{sfid: req.params.sfid}})
     .then(contact => res.status(200).json(contact))
     .catch(error => res.status(400).json({ error }));
     };

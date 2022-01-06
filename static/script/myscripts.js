@@ -163,10 +163,14 @@ const addBtnShowCompte = () => {
     logo.after(btn);
     async function showCompte(event) {
         event.preventDefault()
+        const userId = sessionStorage.getItem('userId')
         const result = await fetch('/api/contact/', {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
+            },
+            params: {
+                sfid : userId
             }
         }).then((res) => {
             res.json().then((comptes) => {
@@ -324,7 +328,7 @@ const addProductList = (products) => {
 }
 
 const addCompteList = (comptes) => {
-    if(typeof(products) != 'undefined' && products != null) {
+    if(typeof(comptes) != 'undefined' && comptes != null) {
         // get the reference for the body
         const positionCompte = document.getElementById('btn-showCompte')
         try {
