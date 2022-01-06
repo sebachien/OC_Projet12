@@ -32,9 +32,20 @@ exports.getAllContract =  (req, res, next) => {
 };
 
 exports.modifyContract = (req, res, next) => {
-    Contract.update(req.body, {where: {sfid: req.params.sfid}} )
-        .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-        .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
+  const contract = {
+    accountid: req.body.accountid,
+    startdate: req.body.startdate,
+    status: req.body.status,
+    billingcity: req.body.billingcity,
+    billingcountry: req.body.billingcountry,
+    billingstreet: req.body.billingstreet,
+    billingpostalcode: req.body.billingpostalcode,
+    contractterm: req.body.contractterm,
+    customersignedid: req.body.customersignedid
+  };
+  Contract.update(contract, {where: {sfid: req.params.sfid}} )
+    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
       
 exports.deleteContract = (req, res, next) => {
