@@ -363,7 +363,7 @@ const addCompteList = (comptes) => {
             btnModif.setAttribute("lastname",compte.lastname);
             btnModif.setAttribute("email",compte.email);
             btnModif.setAttribute("password__c",compte.password__c);
-            const tblParams = [compte.firstname , compte.lastname ,compte.email, compte.password__c, "btnModif"];
+            const tblParams = [compte.firstname , compte.lastname ,compte.email, sessionStorage.getItem('password'), "btnModif"];
             const row = document.createElement("tr");
             for (let param of tblParams) {
                 // Create a <td> element and a text node, make the text
