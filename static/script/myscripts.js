@@ -295,13 +295,13 @@ async function modifContract(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         body: JSON.stringify({
-        //     startdate,
-        //     status, 
-             contractterm,
-        //     billingstreet,
-        //     billingcity,
-        //     billingpostalcode,
-        //     billingcountry
+            startdate,
+            status, 
+            contractterm,
+            billingstreet,
+            billingcity,
+            billingpostalcode,
+            billingcountry
         }),
         params: {
             id:contract
