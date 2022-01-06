@@ -249,6 +249,7 @@ const addFormModifContract = (event) => {
             <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
         </form>
     </div>`;
+    console.log(form)
     form.addEventListener('submit', modifContract)
     btn.before(form);
 }
