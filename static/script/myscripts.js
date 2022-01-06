@@ -309,11 +309,6 @@ async function modifContract(event) {
         })
     }).then((res) => {
         res.json();
-        try{
-            removeExistForm()
-        }catch(error){
-            console.log('Pas de formulaire a remove')
-        }
     })
     
 }
