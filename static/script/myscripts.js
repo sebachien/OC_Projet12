@@ -201,7 +201,7 @@ const addEventListenerBtn = () => {
     }
 }
 
-const addFormCreateContract = (event) => {
+const addFormModifContract = (event) => {
     try{
         removeExistForm()
     }catch(error){
