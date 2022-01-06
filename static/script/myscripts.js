@@ -163,14 +163,14 @@ const addBtnShowCompte = () => {
     logo.after(btn);
     async function showCompte(event) {
         event.preventDefault()
-        const userId = sessionStorage.getItem('userId')
-        const result = await fetch('/api/contact/', {
+        const sfid = sessionStorage.getItem('userId')
+        const result = await fetch('/api/contact/all/'+sfid, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
             },
             params: {
-                sfid : userId
+                sfid : sfid
             }
         }).then((res) => {
             res.json().then((comptes) => {

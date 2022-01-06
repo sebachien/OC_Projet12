@@ -8,7 +8,7 @@ const auth = require('../middleware/auth');
 router.get('/:id', auth ,contactCtrl.getOneContact);
 router.put('/:id', auth ,contactCtrl.modifyContact);
 router.delete('/:id', auth ,contactCtrl.deleteContact);
-router.get('/',contactCtrl.getAllContact);
+router.get('/all/:sfid',contactCtrl.getAllContact);
 
 router.post('/register', contactCtrl.register);
 router.post('/login', contactCtrl.login);
