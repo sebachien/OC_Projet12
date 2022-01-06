@@ -321,7 +321,8 @@ const addEventListenerBtnProduct = () => {
 const addFormModifContract = (event) => {
     event.preventDefault()
     try{
-        removeExistForm()
+        removeExistForm();
+        removeExistTbl();
     }catch(error){
         console.log('Pas de formulaire a remove')
     }
@@ -376,6 +377,7 @@ const addFormModifProduct = (event) => {
     event.preventDefault()
     try{
         removeExistForm()
+        removeExistTbl()
     }catch(error){
         console.log('Pas de formulaire a remove')
     }
