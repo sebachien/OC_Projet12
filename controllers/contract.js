@@ -49,7 +49,7 @@ exports.modifyContract = (req, res, next) => {
   console.log(`retrieved record ${JSON.stringify(record,null,2)}`) 
 
   let contract = {
-    status: req.body.status
+    contractterm: req.body.contractterm
   }
   
   record.update(contract).then( updatedRecord => {
@@ -58,10 +58,7 @@ exports.modifyContract = (req, res, next) => {
   })
 
 })
-.catch((error) => {
-  // do seomthing with the error
-  throw new Error(error)
-})
+.catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
       
 exports.deleteContract = (req, res, next) => {
