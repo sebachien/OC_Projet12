@@ -249,7 +249,8 @@ const addFormModifContract = (event) => {
         </form>
     </div>`;
     console.log(form)
-    form.addEventListener('submit', modifContract(event))
+    sessionStorage.setItem('contract', event.target.attributes.data.nodeValue);
+    form.addEventListener('submit', modifContract())
     btn.before(form);
 }
 
@@ -273,9 +274,9 @@ async function suprContract(event) {
     
 }
 
-async function modifContract(event,e) {
-    e.preventDefault()
-    const contract = event.target.attributes.data.nodeValue
+async function modifContract(event) {
+    event.preventDefault()
+    const contract = sessionStorage.getItem('contract');
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
         headers: {
