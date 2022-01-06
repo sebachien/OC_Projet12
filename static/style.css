@@ -95,6 +95,17 @@ form {
   border: 3px solid #04AA6D;
 }
 
+#tbl-showCompte {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid #04AA6D;
+ }
+
+ #tbl-showCompte th,  #tbl-showCompte td {
+  padding: 20px;
+  border: 3px solid #04AA6D;
+}
 
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {

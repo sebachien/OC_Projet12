@@ -62,7 +62,7 @@ const addLoginEventListener = () => {
         event.preventDefault()
         const email = document.getElementById('email').value
         const password__c = document.getElementById('password').value
-
+        sessionStorage.setItem('password', password__c);
         const result = await fetch('/api/contact/login', {
             method: 'POST',
             headers: {
@@ -79,7 +79,7 @@ const addLoginEventListener = () => {
                     sessionStorage.setItem('token', data.token);
                     sessionStorage.setItem('userId', data.contactId);
                     sessionStorage.setItem('status', 'connecté');
-                    
+                   
                 })
                 
             };
@@ -522,20 +522,20 @@ const addFormModifCompte = (event) => {
     form.innerHTML =`<div class="container m-5">
         <form>
             <div class="mb-3">
-                <label for="firstname">Rue</label>
+                <label for="firstname">Prénom</label>
                 <input type="text" class="form-control" id="firstname" value="`+event.target.attributes.firstname.nodeValue+`">
             </div>
             <div class="mb-3">
-                <label for="lastname">Rue</label>
+                <label for="lastname">Nom</label>
                 <input type="text" class="form-control" id="lastname" value="`+event.target.attributes.lastname.nodeValue+`">
             </div>
             <div class="mb-3">
-                <label for="email">Rue</label>
+                <label for="email">Email</label>
                 <input type="text" class="form-control" id="name" value="`+event.target.attributes.email.nodeValue+`">
             </div>
             <div class="mb-3">
-                <label for="password__c">Ville</label>
-                <input type="text" class="form-control" id="password__c" value="`+event.target.attributes.password__c.nodeValue+`">
+                <label for="password__c">Mot de passe</label>
+                <input type="text" class="form-control" id="password__c" value="`+sessionStorage.getItem('password')+`">
             </div>
             <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
         </form>
@@ -662,7 +662,7 @@ async function modifCompte(event) {
     const lastname = document.getElementById('lastname').value
     const email = document.getElementById('email').value
     const password__c = document.getElementById('password__c').value
-
+    sessionStorage.setItem('password', password__c);
     const result = await fetch('/api/contact/'+compte, {
         method: 'PUT',
         headers: {
