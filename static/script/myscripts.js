@@ -151,8 +151,35 @@ const addBtnShowProduct = () => {
                 }
                 })
             })
-    }
-    
+    } 
+}
+
+const addBtnShowCompte = () => {
+    const logo = document.getElementById('logo')
+    const btn = document.createElement("button");
+    btn.setAttribute("id","btn-showCompte");
+    btn.innerText = "Afficher Compte"
+    btn.addEventListener('click', showCompte);
+    logo.after(btn);
+    async function showCompte(event) {
+        event.preventDefault()
+        const result = await fetch('/api/contact/', {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer '+sessionStorage.getItem('token')
+            }
+        }).then((res) => {
+            res.json().then((comptes) => {
+                addCompteList(comptes);
+            }).then((res) => {
+                addEventListenerBtnCompte();
+                try {
+                    removeExistForm();
+                } catch (error) {    
+                }
+                })
+            })
+    } 
 }
 
 const addContractList = (contracts) => {
@@ -296,6 +323,72 @@ const addProductList = (products) => {
     }
 }
 
+const addCompteList = (comptes) => {
+    if(typeof(products) != 'undefined' && products != null) {
+        // get the reference for the body
+        const positionCompte = document.getElementById('btn-showCompte')
+        try {
+            removeExistTbl();
+            removeExistForm();
+        } catch (error) {
+            
+        }
+        // creates a <table> element and a <tbody> element
+        const tblComptes = document.createElement("table");
+        tblComptes.setAttribute("id","tbl-showCompte");
+        tblComptes.setAttribute("class","table");
+        const thead = document.createElement("thead");
+        thead.setAttribute("class","thead-dark");
+        thead.innerHTML = `<tr>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+    </tr>`
+        const tblBody = document.createElement("tbody");
+        for(let compte of comptes) {
+            const btnSupr = document.createElement("button");
+            btnSupr.innerHTML = "Supprimer"
+            btnSupr.setAttribute("class","btn btn-outline-danger btn-Supr");
+            btnSupr.setAttribute("data",compte.id);
+            const btnModif = document.createElement("button");
+            btnModif.innerHTML = "Modifier"
+            btnModif.setAttribute("class","btn btn-outline-primary btn-Modif");
+            btnModif.setAttribute("data",compte.id);
+            btnModif.setAttribute("firstname",compte.firstname);
+            btnModif.setAttribute("lastname",compte.lastname);
+            btnModif.setAttribute("email",compte.email);
+            btnModif.setAttribute("password__c",compte.password__c);
+            const tblParams = [compte.firstname , compte.lastname ,compte.email, compte.password__c, "btnModif"];
+            const row = document.createElement("tr");
+            for (let param of tblParams) {
+                // Create a <td> element and a text node, make the text
+                // node the contents of the <td>, and put the <td> at
+                // the end of the table row
+                var cell = document.createElement("td");
+
+                 if(param == "btnModif") {
+                    console.log("param == modif")
+                    cell.appendChild(btnModif);
+                    row.appendChild(cell);
+                } else {
+                    let newText = document.createTextNode(param);
+                    cell.appendChild(newText);
+                    row.appendChild(cell);
+                }
+              }
+              // add the row to the end of the table body
+              tblBody.appendChild(row);
+        }
+        
+        // put the <tbody> in the <table>
+        tblComptes.appendChild(thead);
+        tblComptes.appendChild(tblBody);
+        // sets the border attribute of tbl to 2;
+        positionCompte.before(tblComptes)
+    }
+}
+
 const addEventListenerBtnContract = () => {
     const btnSuprList = document.querySelectorAll('.btn-Supr');
     for(const btnSupr of btnSuprList ) {
@@ -315,6 +408,13 @@ const addEventListenerBtnProduct = () => {
     const btnModifList = document.querySelectorAll('.btn-Modif');
     for(const btnModif of btnModifList ) {
         btnModif.addEventListener('click', addFormModifProduct)
+    }
+}
+
+const addEventListenerBtnCompte = () => {
+    const btnModifList = document.querySelectorAll('.btn-Modif');
+    for(const btnModif of btnModifList ) {
+        btnModif.addEventListener('click', addFormModifCompte)
     }
 }
 
@@ -400,6 +500,44 @@ const addFormModifProduct = (event) => {
     </div>`;
     sessionStorage.setItem('product', event.target.attributes.data.nodeValue);
     form.addEventListener('submit', modifProduct)
+    btn.before(form);
+}
+
+const addFormModifCompte = (event) => {
+    event.preventDefault()
+    try{
+        removeExistForm()
+        removeExistTbl()
+    }catch(error){
+        console.log('Pas de formulaire a remove')
+    }
+        
+    const btn = document.querySelector('#btn-showCompte');
+    var form = document.createElement("form");
+    form.setAttribute("id","modifCompte");
+    form.innerHTML =`<div class="container m-5">
+        <form>
+            <div class="mb-3">
+                <label for="firstname">Rue</label>
+                <input type="text" class="form-control" id="firstname" value="`+event.target.attributes.firstname.nodeValue+`">
+            </div>
+            <div class="mb-3">
+                <label for="lastname">Rue</label>
+                <input type="text" class="form-control" id="lastname" value="`+event.target.attributes.lastname.nodeValue+`">
+            </div>
+            <div class="mb-3">
+                <label for="email">Rue</label>
+                <input type="text" class="form-control" id="name" value="`+event.target.attributes.email.nodeValue+`">
+            </div>
+            <div class="mb-3">
+                <label for="password__c">Ville</label>
+                <input type="text" class="form-control" id="password__c" value="`+event.target.attributes.password__c.nodeValue+`">
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
+        </form>
+    </div>`;
+    sessionStorage.setItem('compte', event.target.attributes.data.nodeValue);
+    form.addEventListener('submit', modifCompte)
     btn.before(form);
 }
 
@@ -513,6 +651,40 @@ async function modifProduct(event) {
     }) 
 }
 
+async function modifCompte(event) {
+    event.preventDefault()
+    const compte = sessionStorage.getItem('compte');
+    const firstname = document.getElementById('firstname').value
+    const lastname = document.getElementById('lastname').value
+    const email = document.getElementById('email').value
+    const password__c = document.getElementById('password__c').value
+
+    const result = await fetch('/api/contact/'+compte, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            Authorization: 'Bearer '+sessionStorage.getItem('token')
+        },
+        body: JSON.stringify({
+            firstname,
+            lastname,
+            email,
+            password__c
+        }),
+        params: {
+            id:compte
+        }
+    }).then((res) => {
+        res.json();
+        try {
+            removeExistForm();
+        } catch (error) {
+            
+        }
+    }) 
+}
+
 const indexLog = () => {
     try {
         removeExistForm();
@@ -522,6 +694,7 @@ const indexLog = () => {
         modifLogoPosition();
         addBtnShowContract();
         addBtnShowProduct();
+        addBtnShowCompte();
     } catch (error) {
         
     }
@@ -739,6 +912,7 @@ if(sessionStorage.getItem('status') != 'connecté') {
     modifLogoPosition();
     addBtnShowContract();
     addBtnShowProduct();
+    addBtnShowCompte();
 }
 
 
