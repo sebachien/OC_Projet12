@@ -144,7 +144,11 @@ const addContractList = (contracts) => {
             btnSupr.innerHTML = "Supprimer"
             btnSupr.setAttribute("class","btn btn-outline-danger");
             btnSupr.setAttribute("data",contract.id);
-            const tblParams = [contract.contractnumber , contract.startdate , contract.enddate , contract.contractterm , contract.status , contract.billingstreet+" "+contract.billingpostalcode+" "+contract.billingcity+" "+contract.billingcountry];
+            const btnModif = document.createElement("button");
+            btnModif.innerHTML = "Modifier"
+            btnModif.setAttribute("class","btn btn-outline-primary");
+            btnModif.setAttribute("data",contract.id);
+            const tblParams = [contract.contractnumber , contract.startdate , contract.enddate , contract.contractterm , contract.status , contract.billingstreet+" "+contract.billingpostalcode+" "+contract.billingcity+" "+contract.billingcountry, "btnSupr", "btnModif"];
             const row = document.createElement("tr");
             for (let param of tblParams) {
                 // Create a <td> element and a text node, make the text
@@ -155,6 +159,10 @@ const addContractList = (contracts) => {
                 if(param == "btnSupr") {
                     console.log("param == supr")
                     cell.appendChild(btnSupr);
+                    row.appendChild(cell);
+                } else if(param == "btnModif") {
+                    console.log("param == modif")
+                    cell.appendChild(btnModif);
                     row.appendChild(cell);
                 } else {
                     let newText = document.createTextNode(param);
