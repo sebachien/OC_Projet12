@@ -34,7 +34,7 @@ exports.modifyProduct = (req, res, next) => {
 exports.deleteProduct = (req, res, next) => {
     Product.destroy({
       where: {
-        sfid: req.params.sfid
+        id: req.params.id
       }
     })
       .then(() => res.status(200).json({ message: 'Objet supprimé !'}))

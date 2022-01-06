@@ -415,7 +415,7 @@ async function suprContract(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         params: {
-            sfid:contract
+            id:contract
         }
     }).then((res) => {
         res.json();
@@ -434,7 +434,7 @@ async function suprProduct(event) {
             Authorization: 'Bearer '+sessionStorage.getItem('token')
         },
         params: {
-            sfid:product
+            id:product
         }
     }).then((res) => {
         res.json();
