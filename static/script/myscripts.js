@@ -130,11 +130,17 @@ const addContractList = (contracts) => {
         tblContracts.setAttribute("class","table");
         const thead = document.createElement("thead");
         thead.setAttribute("class","thead-dark");
+        thead.innerHTML = `<tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Info 1 </th>
+        <th scope="col">Info 2 </th>
+        <th scope="col">Action</th>
+    </tr>`
         const tblBody = document.createElement("tbody");
         for(let contract of contracts) {
             const btnSupr = document.createElement("button");
             btnSupr.innerHTML = "Supprimer"
-            btnSupr.setAttribute("class","btn-Supr");
+            btnSupr.setAttribute("class","btn btn-outline-danger");
             btnSupr.setAttribute("data",contract.id);
             const tblParams = ["Numéro du contrat : "+contract.contractnumber , "Date du début : "+contract.startdate , "Status : "+contract.status , "customersignedid : "+sessionStorage.getItem('userID'), "Id : "+contract.sfid, "btnSupr"];
             const row = document.createElement("tr");
