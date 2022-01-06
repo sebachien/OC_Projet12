@@ -251,6 +251,7 @@ const addFormCreateContract = (event) => {
     </div>`;
     form.addEventListener('submit', createContract)
     btn.before(form);
+}
 
 async function suprContract(event) {
     const contract = event.target.attributes[1].nodeValue
