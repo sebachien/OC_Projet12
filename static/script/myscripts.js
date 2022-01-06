@@ -531,7 +531,7 @@ const addFormModifCompte = (event) => {
             </div>
             <div class="mb-3">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="name" value="`+event.target.attributes.email.nodeValue+`">
+                <input type="text" class="form-control" id="email" value="`+event.target.attributes.email.nodeValue+`">
             </div>
             <div class="mb-3">
                 <label for="password__c">Mot de passe</label>
