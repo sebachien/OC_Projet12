@@ -274,6 +274,7 @@ async function suprContract(event) {
 }
 
 async function modifContract(event) {
+    event.preventDefault()
     const contract = event.target.attributes[1].nodeValue
     console.log("event :"+event.target)
     console.log("contract :"+contract)
