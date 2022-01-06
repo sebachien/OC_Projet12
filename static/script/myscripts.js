@@ -293,7 +293,7 @@ async function modifContract(event) {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             Authorization: 'Bearer '+sessionStorage.getItem('token')
-        }
+        },
         body: JSON.stringify({
         //     startdate,
         //     status, 
