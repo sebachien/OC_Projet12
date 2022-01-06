@@ -221,9 +221,9 @@ const addFormModifContract = (event) => {
             <div class="mb-3">
                 <label for="status">Status</label>
                 <select class="form-select" aria-label="Select status" id="status" placeholder="`+event.target.attributes.status.nodeValue+`">
-                <option value="3">Draft</option>
-                <option value="1">Actived</option>
-                <option value="2">In Approval Process</option>
+                <option value="Draft">Draft</option>
+                <option value="Actived">Actived</option>
+                <option value="In Approval Process">In Approval Process</option>
                 </select>
             </div>
             <div class="mb-3">
