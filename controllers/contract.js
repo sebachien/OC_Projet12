@@ -44,7 +44,7 @@ exports.modifyContract = (req, res, next) => {
 exports.deleteContract = (req, res, next) => {
     Contract.destroy({
       where: {
-        sfid: req.params.sfid
+        id: req.params.id
       }
     })
       .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
