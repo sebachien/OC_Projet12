@@ -132,7 +132,7 @@ const addContractList = (contracts) => {
             const btnSupr = document.createElement("button");
             btnSupr.innerHTML = "Supprimer"
             btnSupr.setAttribute("class","btn-Supr");
-            btnSupr.setAttribute("data",contract._id);
+            btnSupr.setAttribute("data",contract.id);
             const tblParams = ["Numéro du contrat : "+contract.contractnumber , "Date du début : "+contract.startdate , "Status : "+contract.status , "customersignedid : "+sessionStorage.getItem('userID'), "Id : "+contract.sfid, "btnSupr"];
             const row = document.createElement("tr");
             for (let param of tblParams) {
