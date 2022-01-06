@@ -75,17 +75,14 @@ const addLoginEventListener = () => {
         .then((res) => {
             if(res.status == 200) {
                 res.json().then((data) => {
-                    console.log(data.token)
                     sessionStorage.setItem('token', data.token);
                     sessionStorage.setItem('userId', data.contactId);
                     sessionStorage.setItem('status', 'connecté');
-                   
+                    indexLog();
                 })
                 
             };
-        }).then((addIndex) => {
-            indexLog();
-        });    
+        })    
     }
 }
 
