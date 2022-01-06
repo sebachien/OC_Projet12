@@ -273,8 +273,8 @@ async function suprContract(event) {
     
 }
 
-async function modifContract(event) {
-    event.preventDefault()
+async function modifContract(event,e) {
+    e.preventDefault()
     const contract = event.target.attributes.data.nodeValue
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
