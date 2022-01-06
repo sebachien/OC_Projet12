@@ -286,8 +286,6 @@ async function modifContract(event) {
     const billingcity = document.getElementById('billingcity').value
     const billingpostalcode = document.getElementById('billingpostalcode').value
     const billingcountry = document.getElementById('billingcountry').value
-    const customersignedid = sessionStorage.getItem('userId')
-    const accountid ='0017Q000002OefCQAS'
 
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
@@ -306,9 +304,7 @@ async function modifContract(event) {
             billingstreet,
             billingcity,
             billingpostalcode,
-            billingcountry,
-            customersignedid,
-            accountid
+            billingcountry
 
         })
     }).then((res) => {
