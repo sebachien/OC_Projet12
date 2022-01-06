@@ -33,7 +33,7 @@ exports.getAllContract =  (req, res, next) => {
 
 exports.modifyContract = (req, res, next) => {
   console.log(req.body);
-  Contract.update({status: req.body.status}, {sfid: req.params.sfid} )
+  Contract.update({}, {sfid: req.params.sfid} )
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
     .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
