@@ -42,7 +42,7 @@ module.exports = (sequelize, Sequelize) => {
         schema: "salesforce",
         tableName: 'contract',
         createdAt: false,
-        //updatedAt: false
+        updatedAt: false
       
     });
   

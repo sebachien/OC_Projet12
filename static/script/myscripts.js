@@ -304,7 +304,7 @@ async function modifContract(event) {
         //     billingcountry
         }),
         params: {
-            sfid:contract
+            id:contract
         }
     }).then((res) => {
         res.json();
