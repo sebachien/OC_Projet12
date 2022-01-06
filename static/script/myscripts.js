@@ -97,9 +97,11 @@ const addBtnShowContract = () => {
     const customersignedid = sessionStorage.getItem('userId')
     async function showContracts(event) {
         event.preventDefault()
-        const result = await fetch('/api/contract/', {
+        const result = await fetch('/api/contract/'+customersignedid, {
             method: 'GET',
             headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 Authorization: 'Bearer '+sessionStorage.getItem('token')
             },
             params: {
