@@ -481,11 +481,11 @@ async function modifContract(event) {
 
 async function modifProduct(event) {
     event.preventDefault()
-    const contract = sessionStorage.getItem('product');
+    const product = sessionStorage.getItem('product');
     const name = document.getElementById('name').value
     const description = document.getElementById('description').value
 
-    const result = await fetch('/api/contract/'+contract, {
+    const result = await fetch('/api/contract/'+product, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -497,7 +497,7 @@ async function modifProduct(event) {
             description
         }),
         params: {
-            id:contract
+            id:product
         }
     }).then((res) => {
         res.json();
@@ -514,8 +514,10 @@ const indexLog = () => {
         removeExistForm();
         removeExistBtn();
         addBtnCreateContract();
+        addBtnCreateProduct();
         modifLogoPosition();
         addBtnShowContract();
+        addBtnShowProduct();
     } catch (error) {
         
     }
@@ -527,6 +529,15 @@ const addBtnCreateContract = () => {
     btn.classList.add("btn-contract")
     btn.innerText = "Nouveau contract"
     btn.addEventListener('click', addFormCreateContract);
+    logo.after(btn);
+}
+
+const addBtnCreateProduct = () => {
+    const logo = document.getElementById('logo')
+    const btn = document.createElement("button");
+    btn.classList.add("btn-product")
+    btn.innerText = "Nouveau Product"
+    btn.addEventListener('click', addFormCreateProduct);
     logo.after(btn);
 }
 
@@ -619,6 +630,56 @@ const addFormCreateContract = () => {
     
 }
 
+const addFormCreateProduct = () => {
+    try{
+        removeExistForm()
+    }catch(error){
+        console.log('Pas de formulaire a remove')
+    }
+        
+    const btn = document.querySelector('.btn-product');
+    var form = document.createElement("form");
+    form.setAttribute("id","createProduct");
+    form.innerHTML =`<div class="container m-5">
+        <form>
+            <div class="mb-3">
+                <label for="name">Nom du produit</label>
+                <input type="text" class="form-control" id="name" placeholder="truc">
+            </div>
+            <div class="mb-3">
+                <label for="description">Pays</label>
+                <input type="text" class="form-control" id="description" placeholder="Fait la description du produit">
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter ce contrat</button>
+        </form>
+    </div>`;
+    form.addEventListener('submit', createProduct)
+    btn.after(form);
+
+    async function createProduct(event) {
+        event.preventDefault()
+        const name = document.getElementById('name').value
+        const description = document.getElementById('description').value
+
+        const result = await fetch('/api/product/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                Authorization: 'Bearer '+sessionStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                name,
+                description
+
+            })
+        }).then((res) => {
+            res.json()
+        })
+    }
+    
+}
+
 const modifLogoPosition = () => {
     const logo = document.getElementById('logo');
     logo.style.textAlign = 'left';
@@ -670,8 +731,10 @@ if(sessionStorage.getItem('status') != 'connecté') {
 } else if (sessionStorage.getItem('status') == 'connecté') {
     removeExistBtn();
     addBtnCreateContract();
+    addBtnCreateProduct();
     modifLogoPosition();
     addBtnShowContract();
+    addBtnShowProduct();
 }
 
 

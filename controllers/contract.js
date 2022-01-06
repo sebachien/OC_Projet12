@@ -20,7 +20,7 @@ exports.createContract = (req, res, next) => {
 }
 
 exports.getOneContract = (req, res, next) => {
-    Contract.findById(req.params.sfid)
+    Contract.findByPk(req.params.id)
     .then(contract => res.status(200).json(contract))
     .catch(error => res.status(404).json({ error }));
 };
