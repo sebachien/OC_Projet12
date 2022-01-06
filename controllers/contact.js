@@ -32,7 +32,7 @@ exports.modifyContact = (req, res, next) => {
 };
 
 exports.getOneContact = (req, res, next) => {
-    Contact.findOne({_id: req.params.id})
+    Contact.findOne({id: req.params.id})
     .then(contact => res.status(200).json(contact))
     .catch(error => res.status(404).json({ error }));
 };
