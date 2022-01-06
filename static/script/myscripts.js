@@ -200,7 +200,9 @@ const addEventListenerBtn = () => {
     }
 }
 
+
 const addFormModifContract = (event) => {
+    event.preventDefault()
     try{
         removeExistForm()
     }catch(error){
@@ -248,9 +250,8 @@ const addFormModifContract = (event) => {
             <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
         </form>
     </div>`;
-    console.log(form)
     sessionStorage.setItem('contract', event.target.attributes.data.nodeValue);
-    form.addEventListener('submit', modifContract())
+    form.addEventListener('submit', modifContract)
     btn.before(form);
 }
 
