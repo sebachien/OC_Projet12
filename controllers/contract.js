@@ -34,7 +34,7 @@ exports.getAllContract =  (req, res, next) => {
 exports.modifyContract = (req, res, next) => {
   Contract.update(req.body, {where :{sfid: req.params.sfid}, fields : ["contractterm"]})
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-    .catch(error => res.status(400).json({ error: 'Objet non modifié !', error }));
+    .catch(error => res.status(400).json({ error: 'Objet non modifié !'}));
 };
       
 exports.deleteContract = (req, res, next) => {
