@@ -127,6 +127,9 @@ const addContractList = (contracts) => {
         // creates a <table> element and a <tbody> element
         const tblContracts = document.createElement("table");
         tblContracts.setAttribute("id","tbl-showContract");
+        tblContracts.setAttribute("class","table");
+        const thead = document.createElement("thead");
+        thead.setAttribute("class","thead-dark");
         const tblBody = document.createElement("tbody");
         for(let contract of contracts) {
             const btnSupr = document.createElement("button");
@@ -156,6 +159,7 @@ const addContractList = (contracts) => {
         }
         
         // put the <tbody> in the <table>
+        tblContracts.appendChild(thead);
         tblContracts.appendChild(tblBody);
         // sets the border attribute of tbl to 2;
         positionContract.before(tblContracts)
