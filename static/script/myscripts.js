@@ -249,8 +249,7 @@ const addFormModifContract = (event) => {
         </form>
     </div>`;
     console.log(form)
-    const contract = event.target.attributes.data.nodeValue
-    form.addEventListener('submit', modifContract(e,contract))
+    form.addEventListener('submit', modifContract(event))
     btn.before(form);
 }
 
@@ -274,8 +273,9 @@ async function suprContract(event) {
     
 }
 
-async function modifContract(event, contract) {
+async function modifContract(event) {
     event.preventDefault()
+    const contract = event.target.attributes.data.nodeValue
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
         headers: {
