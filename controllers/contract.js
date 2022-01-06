@@ -32,15 +32,8 @@ exports.getAllContract =  (req, res, next) => {
 };
 
 exports.modifyContract = (req, res, next) => {
-  const contract = {
-    startdate: req.body.startdate,
-    status: req.body.status,
-    billingcity: req.body.billingcity,
-    billingcountry: req.body.billingcountry,
-    billingstreet: req.body.billingstreet,
-    billingpostalcode: req.body.billingpostalcode,
-  };
-  await Contract.update(contract, {where: {sfid: req.params.sfid}} )
+  console.log(req.body);
+  Contract.update(req.body, {where: {sfid: req.params.sfid}} )
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
     .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
