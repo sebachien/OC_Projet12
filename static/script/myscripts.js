@@ -94,9 +94,9 @@ const addBtnShowContract = () => {
     btn.innerText = "Afficher contract"
     btn.addEventListener('click', showContracts);
     logo.after(btn);
-    const customersignedid = sessionStorage.getItem('userId')
     async function showContracts(event) {
         event.preventDefault()
+        const customersignedid = sessionStorage.getItem('userId')
         const result = await fetch('/api/contract/'+customersignedid, {
             method: 'GET',
             headers: {
