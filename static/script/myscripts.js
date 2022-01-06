@@ -298,13 +298,13 @@ async function modifContract(event) {
             sfid:contract
         },
         body: JSON.stringify({
-            startdate,
-            status, 
-            contractterm,
-            billingstreet,
-            billingcity,
-            billingpostalcode,
-            billingcountry
+        //     startdate,
+        //     status, 
+        //     contractterm,
+        //     billingstreet,
+        //     billingcity,
+        //     billingpostalcode,
+        //     billingcountry
         })
     }).then((res) => {
         res.json();
