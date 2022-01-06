@@ -161,6 +161,7 @@ const addContractList = (contracts) => {
         const positionContract = document.getElementById('btn-showContract')
         try {
             removeExistTbl();
+            removeExistForm();
         } catch (error) {
             
         }
@@ -235,6 +236,7 @@ const addProductList = (products) => {
         const positionProduct = document.getElementById('btn-showProduct')
         try {
             removeExistTbl();
+            removeExistForm();
         } catch (error) {
             
         }
