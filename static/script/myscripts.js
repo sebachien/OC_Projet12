@@ -105,10 +105,14 @@ const addBtnShowContract = () => {
             }
         }).then((res) => {
             res.json().then((contracts) => {
-                console.log(contracts);
                 addContractList(contracts);
             }).then((res) => {
                 addEventListenerBtn();
+                try {
+                    removeExistForm();
+                } catch (error) {
+                    
+                }
                 })
             })
     }
@@ -308,6 +312,11 @@ async function modifContract(event) {
         }
     }).then((res) => {
         res.json();
+        try {
+            removeExistForm();
+        } catch (error) {
+            
+        }
     })
     
 }
