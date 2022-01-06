@@ -33,15 +33,12 @@ exports.getAllContract =  (req, res, next) => {
 
 exports.modifyContract = (req, res, next) => {
   const contract = {
-    accountid: req.body.accountid,
     startdate: req.body.startdate,
     status: req.body.status,
     billingcity: req.body.billingcity,
     billingcountry: req.body.billingcountry,
     billingstreet: req.body.billingstreet,
     billingpostalcode: req.body.billingpostalcode,
-    contractterm: req.body.contractterm,
-    customersignedid: req.body.customersignedid
   };
   Contract.update(contract, {where: {sfid: req.params.sfid}} )
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
