@@ -9,6 +9,6 @@ router.post('/', auth ,contractCtrl.createContract);
 router.get('/:id', auth ,contractCtrl.getOneContract);
 router.put('/:id', auth ,contractCtrl.modifyContract);
 router.delete('/:id', auth ,contractCtrl.deleteContract);
-router.get('/:customersignedid',auth, contractCtrl.getAllContract);
+router.get('/all/:customersignedid',auth, contractCtrl.getAllContract);
 
 module.exports = router;
