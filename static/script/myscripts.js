@@ -253,7 +253,10 @@ const addFormModifContract = (event) => {
     btn.before(form);
 }
 
-async function suprContract(event, contract) {
+async function suprContract(event) {
+    const contract = event.target.attributes[1].nodeValue
+    console.log("event :"+event.target)
+    console.log("contract :"+contract)
     const result = await fetch('/api/contract/'+contract, {
         method: 'DELETE',
         headers: {
@@ -270,11 +273,8 @@ async function suprContract(event, contract) {
     
 }
 
-async function modifContract(event) {
+async function modifContract(event, contract) {
     event.preventDefault()
-    const contract = event.target.attributes[1].nodeValue
-    console.log("event :"+event.target)
-    console.log("contract :"+contract)
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
         headers: {
