@@ -293,10 +293,7 @@ async function modifContract(event) {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             Authorization: 'Bearer '+sessionStorage.getItem('token')
-        },
-        params: {
-            sfid:contract
-        },
+        }
         body: JSON.stringify({
         //     startdate,
         //     status, 
@@ -305,7 +302,10 @@ async function modifContract(event) {
         //     billingcity,
         //     billingpostalcode,
         //     billingcountry
-        })
+        }),
+        params: {
+            sfid:contract
+        }
     }).then((res) => {
         res.json();
     })
