@@ -249,7 +249,8 @@ const addFormModifContract = (event) => {
         </form>
     </div>`;
     console.log(form)
-    form.addEventListener('submit', modifContract(event.target.attributes.data.nodeValue))
+    const contract = event.target.attributes.data.nodeValue
+    form.addEventListener('submit', modifContract(contract))
     btn.before(form);
 }
 
