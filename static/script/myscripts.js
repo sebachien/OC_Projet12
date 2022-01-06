@@ -222,7 +222,7 @@ const addFormCreateContract = () => {
     const btn = document.querySelector('.btn-contract');
     var form = document.createElement("form");
     form.setAttribute("id","createContract");
-    form.innerHTML =```<div class="container m-5">
+    form.innerHTML =`<div class="container m-5">
         <form>
             <div class="mb-3">
                 <label for="startdate">Début du contrat</label>
@@ -259,7 +259,7 @@ const addFormCreateContract = () => {
             </div>
             <button type="submit" class="btn btn-primary">Ajouter ce contrat</button>
         </form>
-    </div>```;
+    </div>`;
     form.addEventListener('submit', createContract)
     btn.after(form);
 
