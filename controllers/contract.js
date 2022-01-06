@@ -40,7 +40,7 @@ exports.modifyContract = (req, res, next) => {
     billingstreet: req.body.billingstreet,
     billingpostalcode: req.body.billingpostalcode,
   };
-  Contract.update(contract, {where: {sfid: req.params.sfid}} )
+  await Contract.update(contract, {where: {sfid: req.params.sfid}} )
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
     .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
