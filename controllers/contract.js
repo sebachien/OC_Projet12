@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 exports.createContract = (req, res, next) => {
     const contract = {
-        accountid: req.body.email,
+        accountid: req.body.accountid,
         startdate: req.body.startdate,
         status: req.body.status,
         billingcity: req.body.billingcity,
