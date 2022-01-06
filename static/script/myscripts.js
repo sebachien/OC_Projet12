@@ -299,7 +299,7 @@ async function modifContract(event) {
         },
         body: JSON.stringify({
         //     startdate,
-             status, 
+            status : status, 
         //     contractterm,
         //     billingstreet,
         //     billingcity,
