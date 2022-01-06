@@ -36,7 +36,7 @@ exports.modifyContract = (req, res, next) => {
     {
         ...JSON.parse(req.body),
     } : { ...req.body };
-    Contract.update({ ...contractObject, sfid: req.params.sfid },{ where: {sfid: req.params.sfid} }, { ...contractObject, sfid: req.params.sfid })
+    Contract.update({ ...contractObject, where: {sfid: req.params.sfid} )
         .then(() => res.status(200).json({ message: 'Objet modifié !'}))
         .catch(error => res.status(400).json({ error }));
 };

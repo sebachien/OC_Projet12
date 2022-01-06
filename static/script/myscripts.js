@@ -148,6 +148,13 @@ const addContractList = (contracts) => {
             btnModif.innerHTML = "Modifier"
             btnModif.setAttribute("class","btn btn-outline-primary btn-Modif");
             btnModif.setAttribute("data",contract.id);
+            btnModif.setAttribute("startdate",contract.startdate);
+            btnModif.setAttribute("contractterm",contract.contractterm);
+            btnModif.setAttribute("status",contract.status);
+            btnModif.setAttribute("billingstreet",contract.billingstreet);
+            btnModif.setAttribute("billingpostalcode",contract.billingpostalcode);
+            btnModif.setAttribute("billingcity",contract.billingcity);
+            btnModif.setAttribute("billingcountry",contract.billingcountry);
             const tblParams = [contract.contractnumber , contract.startdate , contract.enddate , contract.contractterm , contract.status , contract.billingstreet+" "+contract.billingpostalcode+" "+contract.billingcity+" "+contract.billingcountry, "btnSupr", "btnModif"];
             const row = document.createElement("tr");
             for (let param of tblParams) {
@@ -184,14 +191,88 @@ const addContractList = (contracts) => {
 
 const addEventListenerBtn = () => {
     const btnSuprList = document.querySelectorAll('.btn-Supr');
-    console.log(btnSuprList);
     for(const btnSupr of btnSuprList ) {
         console.log(btnSupr);
         btnSupr.addEventListener('click', suprContract)
     }
+    const btnModifList = document.querySelectorAll('.btn-Modis');
+    for(const btnModif of btnModifList ) {
+        btnModif.addEventListener('click', addFormModifContract)
+    }
 }
 
+const addFormCreateContract = (event) => {
+    try{
+        removeExistForm()
+    }catch(error){
+        console.log('Pas de formulaire a remove')
+    }
+        
+    const btn = document.querySelector('.btn-showContract');
+    var form = document.createElement("form");
+    form.setAttribute("id","modifContract");
+    form.innerHTML =`<div class="container m-5">
+        <form>
+            <div class="mb-3">
+                <label for="startdate">Début du contrat</label>
+                <input type="date" class="form-control" id="startdate" placeholder=`+event.target.attributes.startdate+`>
+            </div>
+            <div class="mb-3">
+                <label for="status">Status</label>
+                <select class="form-select" aria-label="Select status" id="status" placeholder=`+event.target.attributes.status+`>
+                <option value="3">Draft</option>
+                <option value="1">Actived</option>
+                <option value="2">In Approval Process</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="contractterm">Temps du contract (en mois)</label>
+                <input type="number" class="form-control" id="contractterm" placeholder=`+event.target.attributes.contractterm+`>
+            </div>
+            <h3>Adresse de facturation :</h3>
+            <div class="mb-3">
+                <label for="billingstreet">Rue</label>
+                <input type="text" class="form-control" id="billingstreet" placeholder=`+event.target.attributes.billingstreet+`>
+            </div>
+            <div class="mb-3">
+                <label for="billingcity">Ville</label>
+                <input type="text" class="form-control" id="billingcity" placeholder=`+event.target.attributes.billingcity+`>
+            </div>
+            <div class="mb-3">
+                <label for="billingpostalcode">Code postal</label>
+                <input type="text" class="form-control" id="billingpostalcode" placeholder=`+event.target.attributes.billingpostalcode+`>
+            </div>
+            <div class="mb-3">
+                <label for="billingcountry">Pays</label>
+                <input type="text" class="form-control" id="billingcountry" placeholder=`+event.target.attributes.billingcountry+`>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter ce contrat</button>
+        </form>
+    </div>`;
+    form.addEventListener('submit', createContract)
+    btn.before(form);
+
 async function suprContract(event) {
+    const contract = event.target.attributes[1].nodeValue
+    console.log("event :"+event.target)
+    console.log("contract :"+contract)
+    const result = await fetch('/api/contract/'+contract, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            Authorization: 'Bearer '+sessionStorage.getItem('token')
+        },
+        params: {
+            sfid:contract
+        }
+    }).then((res) => {
+        res.json()
+    })
+    
+}
+
+async function modifContract(event) {
     const contract = event.target.attributes[1].nodeValue
     console.log("event :"+event.target)
     console.log("contract :"+contract)
