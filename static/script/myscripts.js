@@ -246,10 +246,10 @@ const addFormModifContract = (event) => {
                 <label for="billingcountry">Pays</label>
                 <input type="text" class="form-control" id="billingcountry" placeholder=`+event.target.attributes.billingcountry+`>
             </div>
-            <button type="submit" class="btn btn-primary">Ajouter ce contrat</button>
+            <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
         </form>
     </div>`;
-    form.addEventListener('submit', createContract)
+    form.addEventListener('submit', modifContract)
     btn.before(form);
 }
 
