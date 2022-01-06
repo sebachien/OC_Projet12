@@ -142,11 +142,11 @@ const addContractList = (contracts) => {
         for(let contract of contracts) {
             const btnSupr = document.createElement("button");
             btnSupr.innerHTML = "Supprimer"
-            btnSupr.setAttribute("class","btn btn-outline-danger");
+            btnSupr.setAttribute("class","btn btn-outline-danger btn-Supr");
             btnSupr.setAttribute("data",contract.id);
             const btnModif = document.createElement("button");
             btnModif.innerHTML = "Modifier"
-            btnModif.setAttribute("class","btn btn-outline-primary");
+            btnModif.setAttribute("class","btn btn-outline-primary btn-Modif");
             btnModif.setAttribute("data",contract.id);
             const tblParams = [contract.contractnumber , contract.startdate , contract.enddate , contract.contractterm , contract.status , contract.billingstreet+" "+contract.billingpostalcode+" "+contract.billingcity+" "+contract.billingcountry, "btnSupr", "btnModif"];
             const row = document.createElement("tr");
