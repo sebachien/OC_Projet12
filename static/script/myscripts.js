@@ -270,7 +270,8 @@ async function suprContract(event) {
             sfid:contract
         }
     }).then((res) => {
-        res.json()
+        res.json();
+        
     })
     
 }
@@ -278,6 +279,16 @@ async function suprContract(event) {
 async function modifContract(event) {
     event.preventDefault()
     const contract = sessionStorage.getItem('contract');
+    const startdate = document.getElementById('startdate').value
+    const status = document.getElementById('status').value
+    const contractterm = document.getElementById('contractterm').value
+    const billingstreet = document.getElementById('billingstreet').value
+    const billingcity = document.getElementById('billingcity').value
+    const billingpostalcode = document.getElementById('billingpostalcode').value
+    const billingcountry = document.getElementById('billingcountry').value
+    const customersignedid = sessionStorage.getItem('userId')
+    const accountid ='0017Q000002OefCQAS'
+
     const result = await fetch('/api/contract/'+contract, {
         method: 'PUT',
         headers: {
@@ -287,9 +298,26 @@ async function modifContract(event) {
         },
         params: {
             sfid:contract
-        }
+        },
+        body: JSON.stringify({
+            startdate,
+            status, 
+            contractterm,
+            billingstreet,
+            billingcity,
+            billingpostalcode,
+            billingcountry,
+            customersignedid,
+            accountid
+
+        })
     }).then((res) => {
-        res.json()
+        res.json();
+        try{
+            removeExistForm()
+        }catch(error){
+            console.log('Pas de formulaire a remove')
+        }
     })
     
 }
