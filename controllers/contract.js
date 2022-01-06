@@ -32,9 +32,13 @@ exports.getAllContract =  (req, res, next) => {
 };
 
 exports.modifyContract = (req, res, next) => {
-    Contract.update(req.body, {where: {sfid: req.params.sfid}} )
+    const contractObject = req.file ?
+    {
+        ...JSON.parse(req.body),
+    } : { ...req.body };
+    Contract.update(...contractObject, {where: {sfid: req.params.sfid}} )
         .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
 };
       
 exports.deleteContract = (req, res, next) => {
