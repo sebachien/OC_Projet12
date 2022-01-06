@@ -32,13 +32,36 @@ exports.getAllContract =  (req, res, next) => {
 };
 
 exports.modifyContract = (req, res, next) => {
-  Contract.findByPk(req.params.sfid).then((res) => {
-    console.log(res);
-  }).then(() => {
-  Contract.update(req.body, {where :{sfid: req.params.sfid}})
-    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
-    .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
+  // Contract.findByPk(req.params.sfid).then((res) => {
+  //   console.log(res);
+  // }).then(() => {
+  // Contract.update(req.body, {where :{sfid: req.params.sfid}})
+  //   .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+  //   .catch(error => res.status(400).json({ errore: 'Objet non modifié !' }));
+  // })
+  Contract.findOne({where: {id:req.params.sfid}})
+  .then(record => {
+  
+  if (!record) {
+    throw new Error('No record found')
+  }
+
+  console.log(`retrieved record ${JSON.stringify(record,null,2)}`) 
+
+  let contract = {
+    status: req.body.status
+  }
+  
+  record.update(contract).then( updatedRecord => {
+    console.log(`updated record ${JSON.stringify(updatedRecord,null,2)}`)
+    // login into your DB and confirm update
   })
+
+})
+.catch((error) => {
+  // do seomthing with the error
+  throw new Error(error)
+})
 };
       
 exports.deleteContract = (req, res, next) => {
