@@ -215,11 +215,11 @@ const addFormModifContract = (event) => {
         <form>
             <div class="mb-3">
                 <label for="startdate">Début du contrat</label>
-                <input type="date" class="form-control" id="startdate" placeholder=`+event.target.attributes.startdate.nodeValue+`>
+                <input type="date" class="form-control" id="startdate" placeholder="`+event.target.attributes.startdate.nodeValue+`">
             </div>
             <div class="mb-3">
                 <label for="status">Status</label>
-                <select class="form-select" aria-label="Select status" id="status" placeholder=`+event.target.attributes.status.nodeValue+`>
+                <select class="form-select" aria-label="Select status" id="status" placeholder="`+event.target.attributes.status.nodeValue+`">
                 <option value="3">Draft</option>
                 <option value="1">Actived</option>
                 <option value="2">In Approval Process</option>
@@ -227,24 +227,24 @@ const addFormModifContract = (event) => {
             </div>
             <div class="mb-3">
                 <label for="contractterm">Temps du contract (en mois)</label>
-                <input type="number" class="form-control" id="contractterm" placeholder=`+event.target.attributes.contractterm.nodeValue+`>
+                <input type="number" class="form-control" id="contractterm" placeholder="`+event.target.attributes.contractterm.nodeValue+`">
             </div>
             <h3>Adresse de facturation :</h3>
             <div class="mb-3">
                 <label for="billingstreet">Rue</label>
-                <input type="text" class="form-control" id="billingstreet" placeholder=`+event.target.attributes.billingstreet.nodeValue+`>
+                <input type="text" class="form-control" id="billingstreet" placeholder="`+event.target.attributes.billingstreet.nodeValue+`">
             </div>
             <div class="mb-3">
                 <label for="billingcity">Ville</label>
-                <input type="text" class="form-control" id="billingcity" placeholder=`+event.target.attributes.billingcity.nodeValue+`>
+                <input type="text" class="form-control" id="billingcity" placeholder="`+event.target.attributes.billingcity.nodeValue+`">
             </div>
             <div class="mb-3">
                 <label for="billingpostalcode">Code postal</label>
-                <input type="text" class="form-control" id="billingpostalcode" placeholder=`+event.target.attributes.billingpostalcode.nodeValue+`>
+                <input type="text" class="form-control" id="billingpostalcode" placeholder="`+event.target.attributes.billingpostalcode.nodeValue+`">
             </div>
             <div class="mb-3">
                 <label for="billingcountry">Pays</label>
-                <input type="text" class="form-control" id="billingcountry" placeholder=`+event.target.attributes.billingcountry.nodeValue+`>
+                <input type="text" class="form-control" id="billingcountry" placeholder="`+event.target.attributes.billingcountry.nodeValue+`">
             </div>
             <button type="submit" class="btn btn-primary">Modifier ce contrat</button>
         </form>
