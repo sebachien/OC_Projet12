@@ -420,8 +420,6 @@ async function suprContract(event) {
 
 async function suprProduct(event) {
     const product = event.target.attributes[1].nodeValue
-    console.log("event :"+event.target)
-    console.log("contract :"+contract)
     const result = await fetch('/api/contract/'+product, {
         method: 'DELETE',
         headers: {
